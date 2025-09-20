@@ -1,0 +1,29 @@
+# Main libraries for working with NLP
+transformers
+tensorboard
+
+# Library for array computations
+numpy
+
+# Libraries for machine learning and metrics
+scikit-learn
+
+# Visualization
+matplotlib
+
+
+# Text data processing
+pandas
+openpyxl
+
+# Other
+
+# NLP
+tqdm
+seqeval
+
+
+torch
+
+# PyTorch with GPU support (depends on CUDA version)
+# pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
