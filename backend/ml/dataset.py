@@ -31,7 +31,6 @@ class NerDataSet(Dataset):
         
         self.label2idx = label2idx
         
-        # TODO добавить класс для типизации
         self.tokenizer = AutoTokenizer.from_pretrained(
             tokenizer_path,
             cache_dir=cache_dir,

@@ -1,9 +1,9 @@
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 
-from app.routers import api_router
+from app.routers.ner_model import api_router
 from app.settings import settings
-from app.utils.logging import setup_logging
+from app.logging import setup_logging
 
 setup_logging(log_dir=settings.LOG_DIR, log_level=settings.LOG_LEVEL)
 
