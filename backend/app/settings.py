@@ -2,10 +2,10 @@ import os
 from pathlib import Path
 
 import torch
-from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic_settings import BaseSettings
 from pydantic import field_validator, Field
 
-from app.logging import setup_logging
+from backend.app.utils.logging import setup_logging
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
