@@ -195,9 +195,11 @@ class NerDataSet(Dataset):
                 current = None
 
         for token, (start, end), label in zip(tokens, offsets, labels):
-            if token in tokenizer.all_special_tokens or label == "O" or start == end:
+            if token in tokenizer.all_special_tokens or start == end:
                 flush_current()
                 continue
+
+            ent_type = None
             if label.startswith("B-"):
                 ent_type = label[2:]
                 flush_current()
@@ -221,8 +223,20 @@ class NerDataSet(Dataset):
                         "entity": f"I-{ent_type}",
                         "word": text[start:end]
                     }
-            else:
-                flush_current()
+
+            elif label == "O":
+                if current and current["entity"] == "O" and current["end_index"] == int(start):
+                    current["end_index"] = int(end)
+                    current["word"] = text[current["start_index"]:end]
+                else:
+                    flush_current()
+                    current = {
+                        "start_index": int(start),
+                        "end_index": int(end),
+                        "entity": "O",
+                        "word": text[start:end]
+                    }
+
         flush_current()
         return entities
     
