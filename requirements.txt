@@ -21,7 +21,7 @@ openpyxl
 # NLP
 tqdm
 seqeval
-torchcrf
+pytorch-crf
 
 
 torch
