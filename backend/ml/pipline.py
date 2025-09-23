@@ -40,7 +40,6 @@ class NERPipelineCRF:
         )
         return entities
 
-
     def predict_dataset(self, dataset, batch_size: int = 16):
         all_results = []
         loader = torch.utils.data.DataLoader(dataset, batch_size=batch_size)
@@ -59,3 +58,45 @@ class NERPipelineCRF:
                     all_results.append(entities)
 
         return all_results
+    
+    def predict(self, texts: list[str], batch_size: int = 64) -> list[list[dict]]: 
+        
+        all_results = []
+        self.model.eval()
+
+        encoded_batch = self.tokenizer(
+            texts,
+            max_length=self.max_length,
+            padding="max_length",
+            truncation=True,
+            return_offsets_mapping=True,
+            return_token_type_ids=True,
+            return_tensors="pt"
+        )
+
+        offset_mappings = encoded_batch.pop("offset_mapping").cpu().numpy()
+        encoded_batch = {k: v.to(self.device) for k, v in encoded_batch.items()}
+
+        with torch.no_grad():
+            for i in range(0, len(texts), batch_size):
+                batch_slice = {k: v[i:i+batch_size] for k, v in encoded_batch.items()}
+                outputs = self.model(**batch_slice)
+                preds = outputs.predictions.cpu().numpy()
+
+                for j, pred_seq in enumerate(preds):
+                    idx = i + j
+                    encoded_inputs = {
+                        "input_ids": encoded_batch["input_ids"][idx:idx+1].cpu(),
+                        "offset_mapping": torch.tensor(offset_mappings[idx:idx+1])
+                    }
+                    entities = NerDataSet.decode_predictions(
+                        texts[idx],
+                        pred_seq,
+                        self.tokenizer,
+                        self.idx2label,
+                        encoded_inputs
+                    )
+                    all_results.append(entities)
+
+        return all_results
+
