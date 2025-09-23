@@ -1,0 +1,21 @@
+services:
+  ner:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: x5_ner
+    ports:
+      - "8080:8080"
+    environment:
+      - MODEL_DIR=/app/data/models/
+      - MAX_LEN=128
+      - WORKERS=2
+    # volumes:
+    #   - ../data:/app/data:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:8080/docs > /dev/null || exit 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 5s

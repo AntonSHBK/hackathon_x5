@@ -1,3 +1,8 @@
+fastapi==0.115.0
+uvicorn==0.30.6
+pydantic==2.9.2
+orjson==3.10.7
+
 # Main libraries for working with NLP
 transformers
 tensorboard
@@ -22,7 +27,8 @@ openpyxl
 tqdm
 seqeval
 torchcrf
-
+pytorch-crf
+plotly
 
 torch
 

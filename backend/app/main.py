@@ -1,62 +1,46 @@
 from fastapi import FastAPI
-from fastapi.responses import HTMLResponse
+from pydantic import BaseModel
+from typing import List, Dict, Any
+import os, json
+from pathlib import Path
 
-from app.routers import api_router
-from app.settings import settings
-from backend.app.utils.logging import setup_logging
+# импортируем твой пайплайн
+from ml.pipline import NERPipelineCRF
 
-setup_logging(log_dir=settings.LOG_DIR, log_level=settings.LOG_LEVEL)
+app = FastAPI(title="X5 NER Service", version="1.0.0")
 
-app = FastAPI(
-    title="LLM Microservice",
-    version="0.1.0",
-    description="""
-    Микросервис для взаимодействия с LLM (OpenAI, LangChain и т.д.).
+class InModel(BaseModel):
+    input: str
 
-    **Доступные функции:**
-    - Отправка сообщений в чат-модель (полный ответ)
-    - Отправка сообщений в чат-модель (потоковый ответ)
-    - (В будущем) генерация изображений, транскрипция аудио и др.
-    
-    **Формат сообщений**:
-    - `role`: "user" | "system" | "assistant"
-    - `content`: текст сообщения
-    """,
-    contact={
-        "name": "AID",
-        "email": "anton42@yandex.ru"
-    }
-)
+@app.on_event("startup")
+async def load_model():
+    data_dir = Path(os.getenv("MODEL_DIR", "/app/data/models/"))
+    model_dir = data_dir / "ner_x5_88"
+    label2idx_path = data_dir / "label2idx.json"
+    idx2label_path = data_dir / "idx2label.json"
 
-app.include_router(api_router)
+    with open(label2idx_path, "r", encoding="utf-8") as f:
+        label2idx = json.load(f)
 
+    with open(idx2label_path, "r", encoding="utf-8") as f:
+        idx2label = {int(k): v for k, v in json.load(f).items()}
 
-@app.get("/health", summary="Проверка работоспособности")
-def health_check():
-    """
-    Возвращает `status: ok`, если сервис запущен.
-    """
-    return {"status": "ok"}
+    pipeline = NERPipelineCRF(
+        model_path=model_dir,
+        label2idx=label2idx,
+        idx2label=idx2label,
+        max_length=int(os.getenv("MAX_LEN", "128"))
+    )
 
+    app.state.pipeline = pipeline
 
-@app.get("/", response_class=HTMLResponse, summary="Статус API")
-def root():
-    """
-    Главная страница сервиса.
-    Возвращает сообщение о том, что сервис запущен, и ссылки на документацию.
-    """
-    return """
-    <html>
-        <head>
-            <title>LLM Service API</title>
-        </head>
-        <body>
-            <h1>Сервис работает</h1>
-            <p>Добро пожаловать в API LLM Service.</p>
-            <ul>
-                <li><a href="/docs">Swagger UI</a> — интерактивная документация</li>
-                <li><a href="/redoc">ReDoc</a> — альтернативная документация</li>
-            </ul>
-        </body>
-    </html>
-    """
+@app.post("/api/predict")
+async def predict(body: InModel) -> List[Dict[str, Any]]:
+    text = (body.input or "").strip()
+    if not text:
+        return []
+
+    pipeline: NERPipelineCRF = app.state.pipeline
+    entities = pipeline.predict_text(text)
+
+    return entities

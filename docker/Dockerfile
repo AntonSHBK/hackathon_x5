@@ -1,17 +1,23 @@
 FROM python:3.11-slim
 
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    curl \
-    git \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+ENV PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=1 \
+    PYTHONPATH=/app/backend
 
 WORKDIR /app
 
-COPY . /app
+RUN apt-get update && apt-get install -y --no-install-recommends curl && rm -rf /var/lib/apt/lists/*
 
-RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir -r requirements.txt
+COPY requirements.txt /tmp/requirements.txt
+RUN python -m pip install --upgrade pip && pip install -r /tmp/requirements.txt
 
-EXPOSE 8000
+COPY backend/ /app/backend/
+COPY data/ /app/data/
+
+ENV MODEL_DIR=/app/data/ner_x5_88 \
+    MAX_LEN=128
+
+EXPOSE 8080
+
+# Позволяем задавать число воркеров через ENV WORKERS (дефолт 2)
+CMD ["/bin/sh", "-c", "uvicorn backend.app.main:app --host 0.0.0.0 --port 8080 --workers ${WORKERS:-2}"]
