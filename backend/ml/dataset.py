@@ -310,8 +310,8 @@ class NerDataSet(Dataset):
         model,
         idx2label,
         batch_size: int = 16,
-        device="cpu",
-        layer: int = -1
+        device: str = "cpu",
+        layer: int = -1,
     ):
         model.eval().to(device)
         loader = DataLoader(self, batch_size=batch_size)
@@ -319,8 +319,8 @@ class NerDataSet(Dataset):
         all_embeddings = []
         all_entropies = []
         all_labels = []
-        all_entities = []    
-        all_correct = []    
+        all_entities = []
+        all_correct = []
 
         with torch.no_grad():
             for batch_idx, batch in enumerate(loader):
@@ -340,15 +340,15 @@ class NerDataSet(Dataset):
                 entropies = self.compute_entropy(outputs.logits)
 
                 for i in range(hidden_states.size(0)):
-                    mask = attention_mask[i].bool()
-                    text = self.df.loc[len(all_entities), self.text_label]
-                    
                     row_idx = batch_idx * loader.batch_size + i
+                    text = self.df.loc[row_idx, self.text_label]
                     ann_list = self.df.loc[row_idx, self.target_label]
 
-                    full_emb = hidden_states[i].cpu()
-                    mean_emb = full_emb[mask].mean(dim=0).cpu()
-                    cls_emb = full_emb[0].cpu()
+                    mask = attention_mask[i].bool()
+
+                    full_emb = hidden_states[i]
+                    mean_emb = full_emb[mask].mean(dim=0).detach().cpu()
+                    cls_emb = full_emb[0].detach().cpu()
 
                     encoded_inputs = self.tokenizer(
                         text,
@@ -358,7 +358,7 @@ class NerDataSet(Dataset):
                         return_offsets_mapping=True,
                         return_token_type_ids=True,
                         return_tensors="pt"
-                    )
+                    ).to(device)
 
                     word_embs = self.aggregate_word_embeddings(
                         text=text,
@@ -367,29 +367,32 @@ class NerDataSet(Dataset):
                         encoded_inputs=encoded_inputs
                     )
 
-                    full_entropy = entropies[i].cpu()
+                    full_entropy = entropies[i]
                     mean_entropy = full_entropy[mask].mean().item()
                     cls_entropy = full_entropy[0].item()
                     word_entropies = self.aggregate_word_entropies(
-                        word_embs, full_entropy, encoded_inputs
+                        word_embs, full_entropy.detach().cpu(), encoded_inputs
                     )
-                    
+
                     all_embeddings.append({
-                        "full": full_emb,
+                        "full": full_emb.detach().cpu(),
                         "mean": mean_emb,
                         "cls": cls_emb,
                         "words": word_embs
                     })
 
                     all_entropies.append({
-                        "full": full_entropy,
+                        "full": full_entropy.detach().cpu(),
                         "mean": mean_entropy,
                         "cls": cls_entropy,
                         "words": word_entropies
                     })
 
-                    pred_ids = predictions[i].cpu().numpy().tolist()
-                    labels = [idx2label.get(pid, "O") if pid != -100 else "O" for pid in pred_ids]
+                    pred_ids = predictions[i].detach().cpu().numpy().tolist()
+                    labels = [
+                        idx2label.get(pid, "O") if pid != -100 else "O"
+                        for pid in pred_ids
+                    ]
                     all_labels.append(labels)
 
                     entities = self.decode_predictions(
@@ -397,19 +400,23 @@ class NerDataSet(Dataset):
                         predictions=pred_ids,
                         tokenizer=self.tokenizer,
                         idx2label=idx2label,
-                        encoded_inputs=encoded_inputs
+                        encoded_inputs=encoded_inputs.to("cpu")
                     )
                     all_entities.append(entities)
-                    
+
                     gold_entities_set = {(s, e, l) for (s, e, l) in ann_list}
-                    pred_entities_set = {(ent["start_index"], ent["end_index"], ent["entity"]) for ent in entities}
+                    pred_entities_set = {
+                        (ent["start_index"], ent["end_index"], ent["entity"])
+                        for ent in entities
+                    }
                     all_correct.append(gold_entities_set == pred_entities_set)
 
         self._embeddings = all_embeddings
         self._entropies = all_entropies
         self.df["pred_labels"] = all_labels
-        self.df["entities"] = all_entities    
-        self.df["is_correct"] = all_correct    
+        self.df["entities"] = all_entities
+        self.df["is_correct"] = all_correct
+  
         
     def visualize_embeddings(
         self,

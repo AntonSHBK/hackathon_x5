@@ -38,6 +38,6 @@ def compute_metrics(eval_pred, idx2label):
         "f1_micro": f1_micro,
         "f1_macro": f1_macro,
         "accuracy": accuracy,
-        "report": report,
+        # "report": report,
     }
     return metrics
