@@ -9,7 +9,13 @@ services:
     environment:
       - MODEL_DIR=/app/data/models/
       - MAX_LEN=128
-      - WORKERS=2
+      - MAX_BATCH=32
+      - MAX_WAIT_MS=6
+      - WORKERS=2            # = числу vCPU
+      - OMP_NUM_THREADS=1
+      - MKL_NUM_THREADS=1
+      - OPENBLAS_NUM_THREADS=1
+      - ORT_NUM_THREADS=1
     # volumes:
     #   - ../data:/app/data:ro
     restart: unless-stopped
