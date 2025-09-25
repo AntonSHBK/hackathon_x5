@@ -9,19 +9,12 @@ services:
     environment:
       - MODEL_DIR=/app/data/models/
       - MAX_LEN=128
-      - MAX_BATCH=32
-      - MAX_WAIT_MS=6
-      - WORKERS=2            # = числу vCPU
+      - MAX_BATCH=1
+      - MAX_WAIT_MS=2
+      - WORKERS=2
+      - DISABLE_MICROBATCH=1
       - OMP_NUM_THREADS=1
       - MKL_NUM_THREADS=1
       - OPENBLAS_NUM_THREADS=1
       - ORT_NUM_THREADS=1
-    # volumes:
-    #   - ../data:/app/data:ro
     restart: unless-stopped
-    healthcheck:
-      test: ["CMD-SHELL", "curl -sf http://localhost:8080/docs > /dev/null || exit 1"]
-      interval: 10s
-      timeout: 3s
-      retries: 5
-      start_period: 5s

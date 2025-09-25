@@ -35,9 +35,8 @@ class MicroBatcher:
                 except asyncio.TimeoutError:
                     break
 
-            # единый инференс для всей партии
             try:
-                results = await self.infer_fn(batch)  # -> List[result]
+                results = await self.infer_fn(batch)
             except Exception as e:
                 for f in futures:
                     if not f.done(): f.set_exception(e)
