@@ -2,7 +2,7 @@
 import os, json, time, logging, asyncio
 from pathlib import Path
 from typing import Any, Dict, List
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from pydantic import BaseModel
 
 from ml.pipline import NERPipelineCRF
@@ -75,13 +75,18 @@ async def _infer_batch(texts: List[str]) -> List[List[Dict[str, Any]]]:
 
     res = PIPELINE.predict(clean)
 
+    log.info("RESULT: %s", res)
+
     out = [[] for _ in texts]
     for i_src, r in zip(idx_map, res):
         out[i_src] = r
     return out
 
 @app.post("/api/predict")
-async def predict(body: InModel) -> List[Dict[str, Any]]:
+async def predict(body: InModel, request: Request) -> List[Dict[str, Any]]:
+    raw_body = await request.body()
+    log.info("REQ_BODY: %s", raw_body.decode("utf-8", errors="ignore"))
+
     await _ensure_inited()
     if os.getenv("DISABLE_MICROBATCH") == "1":
         return (await _infer_batch([body.input]))[0]
