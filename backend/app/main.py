@@ -82,7 +82,7 @@ async def _infer_batch(texts: List[str]) -> List[List[Dict[str, Any]]]:
 
 @app.post("/api/predict")
 async def predict(body: InModel) -> List[Dict[str, Any]]:
-    # await _ensure_inited()
+    await _ensure_inited()
     if os.getenv("DISABLE_MICROBATCH") == "1":
         return (await _infer_batch([body.input]))[0]
     assert BATCHER is not None
