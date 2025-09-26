@@ -175,7 +175,8 @@ class NerDataSet(Dataset):
         predictions: torch.Tensor,
         tokenizer: AutoTokenizer,
         idx2label: Dict[int, str],
-        encoded_inputs: Dict[str, torch.Tensor]
+        encoded_inputs: Dict[str, torch.Tensor],
+        return_word: bool = True
     ) -> list[dict]:
         tokens = tokenizer.convert_ids_to_tokens(encoded_inputs["input_ids"][0])
         offsets = encoded_inputs["offset_mapping"][0].cpu().numpy()
@@ -187,32 +188,23 @@ class NerDataSet(Dataset):
         word_start, word_end = None, None
         word_labels = []
         
-        punctuation_chars = set("-–—.,;:!?()\"'`")
-        
         def assign_word_label(word, start, end, labels):
             for l in labels:
                 if l.startswith("B-"):
-                    return {
-                        "start_index": int(start),
-                        "end_index": int(end),
-                        "entity": l,
-                        "word": word
-                    }
+                    ent = {"start_index": int(start), "end_index": int(end), "entity": l}
+                    if return_word:
+                        ent["word"] = word
+                    return ent
             for l in labels:
                 if l.startswith("I-"):
-                    return {
-                        "start_index": int(start),
-                        "end_index": int(end),
-                        "entity": l,
-                        "word": word
-                    }
-            return {
-                "start_index": int(start),
-                "end_index": int(end),
-                "entity": "O",
-                "word": word
-            }
-
+                    ent = {"start_index": int(start), "end_index": int(end), "entity": l}
+                    if return_word:
+                        ent["word"] = word
+                    return ent
+            ent = {"start_index": int(start), "end_index": int(end), "entity": "O"}
+            if return_word:
+                ent["word"] = word
+            return ent
 
         prev_end = None
 

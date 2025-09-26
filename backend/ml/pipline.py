@@ -59,7 +59,7 @@ class NERPipelineCRF:
 
         return all_results
     
-    def predict(self, texts: list[str], batch_size: int = 64) -> list[list[dict]]: 
+    def predict(self, texts: list[str], batch_size: int = 64, return_word: bool = False) -> list[list[dict]]: 
         
         all_results = []
         self.model.eval()
@@ -94,7 +94,8 @@ class NERPipelineCRF:
                         pred_seq,
                         self.tokenizer,
                         self.idx2label,
-                        encoded_inputs
+                        encoded_inputs,
+                        return_word=return_word
                     )
                     all_results.append(entities)
 
