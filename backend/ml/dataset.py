@@ -180,64 +180,74 @@ class NerDataSet(Dataset):
         tokens = tokenizer.convert_ids_to_tokens(encoded_inputs["input_ids"][0])
         offsets = encoded_inputs["offset_mapping"][0].cpu().numpy()
         pred_ids = [int(p) for p in predictions]
-        tokens = tokens[:len(pred_ids)]
-        offsets = offsets[:len(pred_ids)]
-
         labels = [idx2label.get(pid, "O") for pid in pred_ids]
 
         entities = []
-        current = None
+        current_word = None
+        word_start, word_end = None, None
+        word_labels = []
+        
+        punctuation_chars = set("-–—.,;:!?()\"'`")
+        
+        def assign_word_label(word, start, end, labels):
+            for l in labels:
+                if l.startswith("B-"):
+                    return {
+                        "start_index": int(start),
+                        "end_index": int(end),
+                        "entity": l,
+                        "word": word
+                    }
+            for l in labels:
+                if l.startswith("I-"):
+                    return {
+                        "start_index": int(start),
+                        "end_index": int(end),
+                        "entity": l,
+                        "word": word
+                    }
+            return {
+                "start_index": int(start),
+                "end_index": int(end),
+                "entity": "O",
+                "word": word
+            }
 
-        def flush_current():
-            nonlocal current
-            if current:
-                entities.append(current)
-                current = None
+
+        prev_end = None
 
         for token, (start, end), label in zip(tokens, offsets, labels):
             if token in tokenizer.all_special_tokens or start == end:
-                flush_current()
                 continue
 
-            ent_type = None
-            if label.startswith("B-"):
-                ent_type = label[2:]
-                flush_current()
-                current = {
-                    "start_index": int(start),
-                    "end_index": int(end),
-                    "entity": f"B-{ent_type}",
-                    "word": text[start:end]
-                }
+            piece = text[start:end]
 
-            elif label.startswith("I-"):
-                ent_type = label[2:]
-                if current and current["end_index"] == int(start) and current["entity"].endswith(ent_type):
-                    current["end_index"] = int(end)
-                    current["word"] = text[current["start_index"]:end]
-                else:
-                    flush_current()
-                    current = {
-                        "start_index": int(start),
-                        "end_index": int(end),
-                        "entity": f"I-{ent_type}",
-                        "word": text[start:end]
-                    }
+            if not current_word:
+                current_word = piece
+                word_start, word_end = start, end
+                word_labels = [label]
 
-            elif label == "O":
-                if current and current["entity"] == "O" and current["end_index"] == int(start):
-                    current["end_index"] = int(end)
-                    current["word"] = text[current["start_index"]:end]
-                else:
-                    flush_current()
-                    current = {
-                        "start_index": int(start),
-                        "end_index": int(end),
-                        "entity": "O",
-                        "word": text[start:end]
-                    }
+            elif token.startswith("##"):
+                current_word += piece
+                word_end = end
+                word_labels.append(label)
 
-        flush_current()
+            elif prev_end is not None and start == prev_end:
+                current_word += piece
+                word_end = end
+                word_labels.append(label)
+
+            else:
+                entities.append(assign_word_label(current_word, word_start, word_end, word_labels))
+                current_word = piece
+                word_start, word_end = start, end
+                word_labels = [label]
+
+            prev_end = end
+
+        if current_word:
+            entities.append(assign_word_label(current_word, word_start, word_end, word_labels))
+
         return entities
     
     @staticmethod

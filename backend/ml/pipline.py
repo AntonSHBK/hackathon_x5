@@ -1,7 +1,7 @@
 import torch
 from transformers import AutoTokenizer, AutoConfig
 
-from ml.model import BertForTokenClassificationCRF
+from ml.model import AutoModelForTokenClassificationWithCRF
 from ml.dataset import NerDataSet
 
 class NERPipelineCRF:
@@ -16,7 +16,7 @@ class NERPipelineCRF:
         config.label2id = label2idx
         config.id2label = idx2label
 
-        self.model = BertForTokenClassificationCRF.from_pretrained(model_path, config=config)
+        self.model = AutoModelForTokenClassificationWithCRF.from_pretrained(model_path, config=config)
         self.model.to(self.device)
         self.model.eval()
 
