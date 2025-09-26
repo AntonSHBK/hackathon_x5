@@ -30,7 +30,7 @@ async def _ensure_inited():
             return
         # --- загрузка модели ---
         data_dir = Path(os.getenv("MODEL_DIR", "/app/data/models/"))
-        model_dir = data_dir / "ner_x5_88"
+        model_dir = data_dir / "ner_x5_tiny_89"
         label2idx_path = data_dir / "label2idx.json"
         idx2label_path = data_dir / "idx2label.json"
         max_len = int(os.getenv("MAX_LEN", "128"))
@@ -73,8 +73,7 @@ async def _infer_batch(texts: List[str]) -> List[List[Dict[str, Any]]]:
     if not clean:
         return [[] for _ in texts]
 
-    bs = 16
-    res = PIPELINE.predict(clean, batch_size=bs)
+    res = PIPELINE.predict(clean)
 
     out = [[] for _ in texts]
     for i_src, r in zip(idx_map, res):
