@@ -1,7 +1,7 @@
 # --- сверху файла ---
 import os, json, time, logging, asyncio
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 from fastapi import FastAPI, Request
 from pydantic import BaseModel
 
@@ -14,7 +14,7 @@ logging.basicConfig(level=logging.INFO)
 app = FastAPI(title="X5 NER", version="1.3.0")
 
 class InModel(BaseModel):
-    input: str
+    input: Optional[Any] = None
 
 PIPELINE: NERPipelineCRF | None = None
 BATCHER: MicroBatcher | None = None
@@ -61,7 +61,6 @@ async def _infer_batch(texts: List[str]) -> List[List[Dict[str, Any]]]:
     await _ensure_inited()
     assert PIPELINE is not None
 
-    # отбрасываем пустые — вернём [] на их места
     idx_map, clean = [], []
     for i, t in enumerate(texts):
         t = (t or "").strip()
@@ -70,23 +69,40 @@ async def _infer_batch(texts: List[str]) -> List[List[Dict[str, Any]]]:
             clean.append(t)
     if not clean:
         return [[] for _ in texts]
-
-    t0 = time.perf_counter()
+    
     res = PIPELINE.predict(clean)
-    dt_ms = (time.perf_counter() - t0) * 1000
-    log.info("Processed batch size=%d infer_ms=%.1f", len(clean), dt_ms)
 
     out = [[] for _ in texts]
     for i_src, r in zip(idx_map, res):
         out[i_src] = r
     return out
 
-@app.post("/api/predict")
-async def predict(body: InModel, request: Request) -> List[Dict[str, Any]]:
-    raw_body = await request.body()
 
+@app.post("/api/predict")
+async def predict(request: Request):
+    raw = await request.body()
+    text = ""
+    if raw:
+        try:
+            payload = json.loads(raw)
+            val = payload.get("input", "")
+            text = "" if val is None else str(val).strip()
+        except Exception:
+            return []
+
+    if not text:
+        return []
+    
     await _ensure_inited()
-    if os.getenv("DISABLE_MICROBATCH") == "1":
-        return (await _infer_batch([body.input]))[0]
-    assert BATCHER is not None
-    return await BATCHER.submit(body.input)
+    # text = (body.input or "").strip()
+    log.info("REQ: %r", text)
+
+    try:
+        assert BATCHER is not None
+        result = await BATCHER.submit(text)
+    except Exception as e:
+        log.exception("predict failed: %s", e)
+        result = []
+
+    log.info("OUT: %s", result)
+    return result
