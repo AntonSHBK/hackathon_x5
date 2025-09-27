@@ -9,8 +9,8 @@ services:
     environment:
       - MODEL_DIR=/app/data/models/
       - MAX_LEN=128
-      - MAX_BATCH=16
-      - MAX_WAIT_MS=4
+      - MAX_BATCH=128
+      - MAX_WAIT_MS=8
       - WORKERS=2
       - OMP_NUM_THREADS=1
       - MKL_NUM_THREADS=1

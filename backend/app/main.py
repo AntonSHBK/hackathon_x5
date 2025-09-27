@@ -21,7 +21,6 @@ BATCHER: MicroBatcher | None = None
 _INIT_LOCK = asyncio.Lock()   # защита от гонки при одновременной первой инициализации
 
 async def _ensure_inited():
-    """Ленивая инициализация пайплайна и микробатчера (потокобезопасно)."""
     global PIPELINE, BATCHER
     if PIPELINE is not None and BATCHER is not None:
         return
@@ -53,7 +52,6 @@ async def _ensure_inited():
         max_wait_ms = int(os.getenv("MAX_WAIT_MS", "8"))
         BATCHER = MicroBatcher(_infer_batch, max_batch=max_batch, max_wait_ms=max_wait_ms)
 
-        # прогрев (не обязательно, но полезно)
         try:
             _ = await _infer_batch(["йогурт даниссимо 0.5л 15%"])
         except Exception as e:
@@ -73,9 +71,10 @@ async def _infer_batch(texts: List[str]) -> List[List[Dict[str, Any]]]:
     if not clean:
         return [[] for _ in texts]
 
+    t0 = time.perf_counter()
     res = PIPELINE.predict(clean)
-
-    log.info("RESULT: %s", res)
+    dt_ms = (time.perf_counter() - t0) * 1000
+    log.info("Processed batch size=%d infer_ms=%.1f", len(clean), dt_ms)
 
     out = [[] for _ in texts]
     for i_src, r in zip(idx_map, res):
@@ -85,7 +84,6 @@ async def _infer_batch(texts: List[str]) -> List[List[Dict[str, Any]]]:
 @app.post("/api/predict")
 async def predict(body: InModel, request: Request) -> List[Dict[str, Any]]:
     raw_body = await request.body()
-    log.info("REQ_BODY: %s", raw_body.decode("utf-8", errors="ignore"))
 
     await _ensure_inited()
     if os.getenv("DISABLE_MICROBATCH") == "1":
