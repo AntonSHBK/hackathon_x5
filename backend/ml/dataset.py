@@ -213,25 +213,29 @@ class NerDataSet(Dataset):
                 continue
 
             piece = text[start:end]
-            is_new_word = False
 
-            if not token.startswith("##") and (not current_word or start != prev_end):
-                is_new_word = True
-
-            if token.startswith("_"):
-                is_new_word = True
-                piece = piece.lstrip("_")
-
-            if is_new_word:
+            if not current_word or token.startswith("_") or token.startswith("▁"):
                 if current_word:
                     entities.append(assign_word_label(current_word, word_start, word_end, word_labels))
                 current_word = piece
                 word_start, word_end = start, end
                 word_labels = [label]
-            else:
+
+            elif token.startswith("##"):
                 current_word += piece
                 word_end = end
                 word_labels.append(label)
+
+            elif prev_end is not None and start == prev_end:
+                current_word += piece
+                word_end = end
+                word_labels.append(label)
+
+            else:
+                entities.append(assign_word_label(current_word, word_start, word_end, word_labels))
+                current_word = piece
+                word_start, word_end = start, end
+                word_labels = [label]
 
             prev_end = end
 
