@@ -239,9 +239,50 @@ class NerDataSet(Dataset):
 
         if current_word:
             entities.append(assign_word_label(current_word, word_start, word_end, word_labels))
+            
+        # def merge_entities(entities: list[dict], return_word: bool = True) -> list[dict]:
+        #     merged = []
+        #     buffer = None
+        #     buffer_type = None
+
+        #     for ent in entities:
+        #         if ent["entity"].startswith("B-"):
+        #             if buffer:
+        #                 merged.append(buffer)
+        #             buffer_type = ent["entity"].split("-", 1)[1]
+        #             buffer = ent.copy()
+
+        #         elif ent["entity"].startswith("I-"):
+        #             if buffer and buffer_type == ent["entity"].split("-", 1)[1]:
+        #                 buffer["end_index"] = ent["end_index"]
+        #                 if return_word:
+        #                     buffer["word"] += " " + ent["word"]
+        #             else:
+        #                 if buffer:
+        #                     merged.append(buffer)
+        #                 buffer_type = ent["entity"].split("-", 1)[1]
+        #                 buffer = ent.copy()
+
+        #         elif ent["entity"] == "O":
+        #             if buffer and buffer_type:
+        #                 buffer["end_index"] = ent["end_index"]
+        #                 if return_word:
+        #                     buffer["word"] += " " + ent["word"]
+        #             else:
+        #                 if buffer:
+        #                     merged.append(buffer)
+        #                     buffer, buffer_type = None, None
+        #                 merged.append(ent)
+
+        #     if buffer:
+        #         merged.append(buffer)
+
+        #     return merged
+
+        # entities = merge_entities(entities)
 
         return entities
-    
+
     @staticmethod
     def compute_entropy(logits: torch.Tensor) -> torch.Tensor:
         probs = F.softmax(logits, dim=-1)
