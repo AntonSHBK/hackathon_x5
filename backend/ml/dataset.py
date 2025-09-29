@@ -206,7 +206,7 @@ class NerDataSet(Dataset):
                 ent["word"] = word
             return ent
 
-        prev_end = None
+        rev_end = None
 
         for token, (start, end), label in zip(tokens, offsets, labels):
             if token in tokenizer.all_special_tokens or start == end:
@@ -214,7 +214,11 @@ class NerDataSet(Dataset):
 
             piece = text[start:end]
 
-            if not current_word or token.startswith("_") or token.startswith("▁"):
+            if (not current_word
+                or token.startswith("_")
+                or token.startswith("▁")
+                or label == "O" 
+                or (prev_end is not None and start > prev_end)):
                 if current_word:
                     entities.append(assign_word_label(current_word, word_start, word_end, word_labels))
                 current_word = piece
