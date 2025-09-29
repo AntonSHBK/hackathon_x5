@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from inspect import signature
 from typing import Optional, Tuple, List
 
 import torch
@@ -55,17 +56,23 @@ class AutoModelForTokenClassificationWithCRF(PreTrainedModel):
         
         return_dict = return_dict if return_dict is not None else self.config.use_return_dict
         
-        outputs = self.backbone(
-            input_ids,
-            attention_mask=attention_mask,
-            token_type_ids=token_type_ids,
-            position_ids=position_ids,
-            head_mask=head_mask,
-            inputs_embeds=inputs_embeds,
-            output_attentions=output_attentions,
-            output_hidden_states=output_hidden_states,
-            return_dict=return_dict,
-        )
+        kwargs = {
+            "input_ids": input_ids,
+            "attention_mask": attention_mask,
+            "token_type_ids": token_type_ids,
+            "position_ids": position_ids,
+            "head_mask": head_mask,
+            "inputs_embeds": inputs_embeds,
+            "output_attentions": output_attentions,
+            "output_hidden_states": output_hidden_states,
+            "return_dict": return_dict,
+        }
+
+        # Фильтруем только те, которые реально есть у backbone.forward
+        sig = signature(self.backbone.forward)
+        filtered_kwargs = {k: v for k, v in kwargs.items() if k in sig.parameters}
+
+        outputs = self.backbone(**filtered_kwargs)
 
         sequence_output = outputs[0]
         sequence_output = self.dropout(sequence_output)
