@@ -213,27 +213,25 @@ class NerDataSet(Dataset):
                 continue
 
             piece = text[start:end]
+            is_new_word = False
 
-            if not current_word:
+            if not token.startswith("##") and (not current_word or start != prev_end):
+                is_new_word = True
+
+            if token.startswith("_"):
+                is_new_word = True
+                piece = piece.lstrip("_")
+
+            if is_new_word:
+                if current_word:
+                    entities.append(assign_word_label(current_word, word_start, word_end, word_labels))
                 current_word = piece
                 word_start, word_end = start, end
                 word_labels = [label]
-
-            elif token.startswith("##"):
-                current_word += piece
-                word_end = end
-                word_labels.append(label)
-
-            elif prev_end is not None and start == prev_end:
-                current_word += piece
-                word_end = end
-                word_labels.append(label)
-
             else:
-                entities.append(assign_word_label(current_word, word_start, word_end, word_labels))
-                current_word = piece
-                word_start, word_end = start, end
-                word_labels = [label]
+                current_word += piece
+                word_end = end
+                word_labels.append(label)
 
             prev_end = end
 
@@ -241,45 +239,77 @@ class NerDataSet(Dataset):
             entities.append(assign_word_label(current_word, word_start, word_end, word_labels))
             
         # def merge_entities(entities: list[dict], return_word: bool = True) -> list[dict]:
+        #     n = len(entities)
+        #     if n == 0:
+        #         return []
+
+        #     ents = [e.copy() for e in entities]
+
+        #     i = 0
+        #     while i < n:
+        #         ent = ents[i]
+        #         tag = ent["entity"]
+
+        #         if tag.startswith("B-"):
+        #             t = tag.split("-", 1)[1]
+
+        #             j = i + 1
+        #             while j < n and not ents[j]["entity"].startswith("B-"):
+        #                 j += 1
+        #             stop = j
+
+        #             k = i + 1
+        #             first_i_same = None
+        #             while k < stop:
+        #                 tag_k = ents[k]["entity"]
+        #                 if tag_k.startswith("I-") and tag_k.split("-", 1)[1] == t:
+        #                     first_i_same = k
+        #                     break
+        #                 k += 1
+
+        #             if first_i_same is not None:
+        #                 for p in range(i + 1, first_i_same + 1):
+        #                     if ents[p]["entity"] == "O":
+        #                         ents[p]["entity"] = f"I-{t}"
+        #             i += 1
+        #         else:
+        #             i += 1
+
         #     merged = []
-        #     buffer = None
+        #     buffer = None 
         #     buffer_type = None
 
-        #     for ent in entities:
-        #         if ent["entity"].startswith("B-"):
-        #             if buffer:
-        #                 merged.append(buffer)
-        #             buffer_type = ent["entity"].split("-", 1)[1]
+        #     def flush():
+        #         nonlocal buffer, buffer_type
+        #         if buffer is not None:
+        #             merged.append(buffer)
+        #             buffer, buffer_type = None, None
+
+        #     for ent in ents:
+        #         tag = ent["entity"]
+        #         if tag.startswith("B-"):
+        #             flush()
+        #             buffer_type = tag.split("-", 1)[1]
         #             buffer = ent.copy()
-
-        #         elif ent["entity"].startswith("I-"):
-        #             if buffer and buffer_type == ent["entity"].split("-", 1)[1]:
+        #         elif tag.startswith("I-"):
+        #             t = tag.split("-", 1)[1]
+        #             if buffer is not None and buffer_type == t:
         #                 buffer["end_index"] = ent["end_index"]
-        #                 if return_word:
-        #                     buffer["word"] += " " + ent["word"]
+        #                 if return_word and "word" in ent and "word" in buffer:
+        #                     buffer["word"] = (buffer["word"] + " " + ent["word"]).strip()
         #             else:
-        #                 if buffer:
-        #                     merged.append(buffer)
-        #                 buffer_type = ent["entity"].split("-", 1)[1]
+        #                 flush()
+        #                 buffer_type = t
         #                 buffer = ent.copy()
+        #                 buffer["entity"] = f"B-{t}"
+        #         else:
+        #             flush()
+        #             merged.append(ent)
 
-        #         elif ent["entity"] == "O":
-        #             if buffer and buffer_type:
-        #                 buffer["end_index"] = ent["end_index"]
-        #                 if return_word:
-        #                     buffer["word"] += " " + ent["word"]
-        #             else:
-        #                 if buffer:
-        #                     merged.append(buffer)
-        #                     buffer, buffer_type = None, None
-        #                 merged.append(ent)
-
-        #     if buffer:
-        #         merged.append(buffer)
-
+        #     flush()
         #     return merged
 
-        # entities = merge_entities(entities)
+        # entities = merge_entities(entities, return_word=return_word)
 
         return entities
 
