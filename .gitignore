@@ -1,7 +1,15 @@
-data
+# **data
 other
 **logs
 **__pycache__
+
+data/cache_dir
+data/models
+data/datasets
+data/imgs
+data/download
+
+!data/synthetics
 
 
 /.DS_Store

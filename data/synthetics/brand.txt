@@ -1,0 +1,697 @@
+CocaCola; [(0, 8, "B-BRAND")]
+
+Pepsi; [(0, 5, "B-BRAND")]
+
+Oreo; [(0, 4, "B-BRAND")]
+
+Snickers; [(0, 8, "B-BRAND")]
+
+Mars; [(0, 4, "B-BRAND")]
+
+Milka; [(0, 5, "B-BRAND")]
+
+Pringles; [(0, 8, "B-BRAND")]
+
+Lays; [(0, 4, "B-BRAND")]
+
+Ritter; [(0, 6, "B-BRAND")]
+
+Danone; [(0, 6, "B-BRAND")]
+
+Valio; [(0, 5, "B-BRAND")]
+
+Kinder; [(0, 6, "B-BRAND")]
+
+Lipton; [(0, 6, "B-BRAND")]
+
+Barilla; [(0, 7, "B-BRAND")]
+
+Bonaqua; [(0, 7, "B-BRAND")]
+
+Miratorg; [(0, 8, "B-BRAND")]
+
+Черкизово; [(0, 9, "B-BRAND")]
+
+Петелинка; [(0, 9, "B-BRAND")]
+
+Мистраль; [(0, 8, "B-BRAND")]
+
+Останкино; [(0, 9, "B-BRAND")]
+
+Аленка; [(0, 6, "B-BRAND")]
+
+РотФронт; [(0, 8, "B-BRAND")]
+
+Красный; [(0, 7, "B-BRAND")]
+
+Юбилейное; [(0, 9, "B-BRAND")]
+
+Inmarko; [(0, 7, "B-BRAND")]
+
+Nestle; [(0, 6, "B-BRAND")]
+
+Jacobs; [(0, 6, "B-BRAND")]
+
+Tess; [(0, 4, "B-BRAND")]
+
+Greenfield; [(0, 9, "B-BRAND")]
+
+Rich; [(0, 4, "B-BRAND")]
+
+J7; [(0, 2, "B-BRAND")]
+
+Valio; [(0, 5, "B-BRAND")]
+
+President; [(0, 9, "B-BRAND")]
+
+Lambert; [(0, 7, "B-BRAND")]
+
+Белёвская; [(0, 9, "B-BRAND")]
+
+Шармэль; [(0, 7, "B-BRAND")]
+
+Махеевъ; [(0, 7, "B-BRAND")]
+
+Балтика; [(0, 7, "B-BRAND")]
+
+Velkom; [(0, 6, "B-BRAND")]
+
+Campomos; [(0, 8, "B-BRAND")]
+
+Oreo Snickers Mars; [(0, 4, "B-BRAND"), (5, 13, "B-BRAND"), (14, 18, "B-BRAND")]
+
+Lays Pringles Estrella; [(0, 4, "B-BRAND"), (5, 13, "B-BRAND"), (14, 22, "B-BRAND")]
+
+Milka AlpenGold Ritter; [(0, 5, "B-BRAND"), (6, 15, "B-BRAND"), (16, 22, "B-BRAND")]
+
+Danone Valio President; [(0, 6, "B-BRAND"), (7, 12, "B-BRAND"), (13, 22, "B-BRAND")]
+
+Miratorg Черкизово Петелинка; [(0, 8, "B-BRAND"), (9, 18, "B-BRAND"), (19, 28, "B-BRAND")]
+
+Rich Dobry J7; [(0, 4, "B-BRAND"), (5, 10, "B-BRAND"), (11, 13, "B-BRAND")]
+
+Lipton Tess Greenfield; [(0, 6, "B-BRAND"), (7, 11, "B-BRAND"), (12, 21, "B-BRAND")]
+
+KitKat Bounty Twix; [(0, 5, "B-BRAND"), (6, 12, "B-BRAND"), (13, 17, "B-BRAND")]
+
+Velkom Останкино Рублёвский; [(0, 6, "B-BRAND"), (7, 16, "B-BRAND"), (17, 27, "B-BRAND")]
+
+Балтика Heineken Bud; [(0, 7, "B-BRAND"), (8, 16, "B-BRAND"), (17, 20, "B-BRAND")]
+
+CocaCola Pepsi Fanta; [(0, 8, "B-BRAND"), (9, 14, "B-BRAND"), (15, 20, "B-BRAND")]
+
+Sprite Schweppes Mirinda; [(0, 6, "B-BRAND"), (7, 16, "B-BRAND"), (17, 24, "B-BRAND")]
+
+Oreo Milka AlpenGold; [(0, 4, "B-BRAND"), (5, 10, "B-BRAND"), (11, 20, "B-BRAND")]
+
+Twix Mars Bounty; [(0, 4, "B-BRAND"), (5, 9, "B-BRAND"), (10, 16, "B-BRAND")]
+
+KitKat Nesquik Lion; [(0, 5, "B-BRAND"), (6, 13, "B-BRAND"), (14, 18, "B-BRAND")]
+
+Lay’s Estrella ХрусTeam; [(0, 4, "B-BRAND"), (5, 13, "B-BRAND"), (14, 22, "B-BRAND")]
+
+Pringles РусскаяКартошка FunnyFrisch; [(0, 8, "B-BRAND"), (9, 24, "B-BRAND"), (25, 36, "B-BRAND")]
+
+Danone Чудо Активиа; [(0, 6, "B-BRAND"), (7, 11, "B-BRAND"), (12, 19, "B-BRAND")]
+
+Valio Простоквашино Савушкин; [(0, 5, "B-BRAND"), (6, 18, "B-BRAND"), (19, 27, "B-BRAND")]
+
+President Lambert Hochland; [(0, 9, "B-BRAND"), (10, 17, "B-BRAND"), (18, 26, "B-BRAND")]
+
+Miratorg Велком Черкизово; [(0, 8, "B-BRAND"), (9, 15, "B-BRAND"), (16, 25, "B-BRAND")]
+
+Останкино Рублёвский Дымов; [(0, 9, "B-BRAND"), (10, 20, "B-BRAND"), (21, 26, "B-BRAND")]
+
+Петелинка Индилайт ПерваяФерма; [(0, 9, "B-BRAND"), (10, 19, "B-BRAND"), (20, 31, "B-BRAND")]
+
+Балтика Жигули Budweiser; [(0, 7, "B-BRAND"), (8, 14, "B-BRAND"), (15, 24, "B-BRAND")]
+
+Heineken Carlsberg Amstel; [(0, 8, "B-BRAND"), (9, 18, "B-BRAND"), (19, 25, "B-BRAND")]
+
+Tuborg Guinness Hoegaarden; [(0, 6, "B-BRAND"), (7, 15, "B-BRAND"), (16, 25, "B-BRAND")]
+
+Rich Dobry J7; [(0, 4, "B-BRAND"), (5, 10, "B-BRAND"), (11, 13, "B-BRAND")]
+
+Lipton Tess AhmadTea; [(0, 6, "B-BRAND"), (7, 11, "B-BRAND"), (12, 20, "B-BRAND")]
+
+Greenfield Curtis Richard; [(0, 9, "B-BRAND"), (10, 16, "B-BRAND"), (17, 24, "B-BRAND")]
+
+Jacobs Nescafe Tchibo; [(0, 6, "B-BRAND"), (7, 14, "B-BRAND"), (15, 21, "B-BRAND")]
+
+Простоквашино Савушкин Валио; [(0, 12, "B-BRAND"), (13, 21, "B-BRAND"), (22, 27, "B-BRAND")]
+
+Черкизово Останкино Рублёвский; [(0, 9, "B-BRAND"), (10, 19, "B-BRAND"), (20, 30, "B-BRAND")]
+
+Мироторг Велком Дымов; [(0, 8, "B-BRAND"), (9, 15, "B-BRAND"), (16, 21, "B-BRAND")]
+
+Петелинка Индилайт ПерваяФерма; [(0, 9, "B-BRAND"), (10, 19, "B-BRAND"), (20, 31, "B-BRAND")]
+
+Мистраль Увелка АгроБелогорье; [(0, 8, "B-BRAND"), (9, 14, "B-BRAND"), (15, 28, "B-BRAND")]
+
+Балтика Жигули Очаково; [(0, 7, "B-BRAND"), (8, 14, "B-BRAND"), (15, 22, "B-BRAND")]
+
+Шармэль Аленка КрасныйОктябрь; [(0, 7, "B-BRAND"), (8, 14, "B-BRAND"), (15, 29, "B-BRAND")]
+
+Юбилейное РотФронт Бабаевский; [(0, 9, "B-BRAND"), (10, 18, "B-BRAND"), (19, 29, "B-BRAND")]
+
+ЗолотойКлючик КраснаяШапочка КрасныйПищевик; [(0, 13, "B-BRAND"), (14, 28, "B-BRAND"), (29, 44, "B-BRAND")]
+
+РусскаяКартошка ХрусTeam Кириешки; [(0, 15, "B-BRAND"), (16, 24, "B-BRAND"), (25, 33, "B-BRAND")]
+
+Славянка Крупской Конти; [(0, 8, "B-BRAND"), (9, 16, "B-BRAND"), (17, 22, "B-BRAND")]
+
+Активиа Чудо Ростагроэкспорт; [(0, 7, "B-BRAND"), (8, 12, "B-BRAND"), (13, 28, "B-BRAND")]
+
+Агуша ДомикВДеревне Вкуснотеево; [(0, 5, "B-BRAND"), (6, 19, "B-BRAND"), (20, 31, "B-BRAND")]
+
+Савушкин Продукт Карат Простоквашино; [(0, 17, "B-BRAND"), (18, 23, "B-BRAND"), (24, 36, "B-BRAND")]
+
+Добрый Тонус ФруктовыйСад; [(0, 6, "B-BRAND"), (7, 12, "B-BRAND"), (13, 27, "B-BRAND")]
+
+Очаково Никола Байкал; [(0, 7, "B-BRAND"), (8, 14, "B-BRAND"), (15, 21, "B-BRAND")]
+
+Живое ЗолотаяБочка Бочкарёв; [(0, 6, "B-BRAND"), (7, 19, "B-BRAND"), (20, 28, "B-BRAND")]
+
+Лидское Арсенальное Трёхгорное; [(0, 8, "B-BRAND"), (9, 19, "B-BRAND"), (20, 30, "B-BRAND")]
+
+БелёвскаяПастила Коломенское Славянка; [(0, 15, "B-BRAND"), (16, 26, "B-BRAND"), (27, 35, "B-BRAND")]
+
+БратьяЧебурашкины ВкусВилл Избёнка; [(0, 18, "B-BRAND"), (19, 27, "B-BRAND"), (28, 35, "B-BRAND")]
+
+КокаКола; [(0, 8, "B-BRAND")]
+
+Пепси; [(0, 5, "B-BRAND")]
+
+Орео; [(0, 4, "B-BRAND")]
+
+Сникерс; [(0, 8, "B-BRAND")]
+
+Марс; [(0, 4, "B-BRAND")]
+
+Милка; [(0, 5, "B-BRAND")]
+
+Принглс; [(0, 8, "B-BRAND")]
+
+Лейс; [(0, 4, "B-BRAND")]
+
+Риттер; [(0, 6, "B-BRAND")]
+
+Данон; [(0, 6, "B-BRAND")]
+
+Валио; [(0, 5, "B-BRAND")]
+
+Киндер; [(0, 6, "B-BRAND")]
+
+Липтон; [(0, 6, "B-BRAND")]
+
+Барилла; [(0, 7, "B-BRAND")]
+
+Бонаква; [(0, 7, "B-BRAND")]
+
+Мираторг; [(0, 8, "B-BRAND")]
+
+Черкизово; [(0, 9, "B-BRAND")]
+
+Петелинка; [(0, 9, "B-BRAND")]
+
+Мистраль; [(0, 8, "B-BRAND")]
+
+Останкино; [(0, 9, "B-BRAND")]
+
+Аленка; [(0, 6, "B-BRAND")]
+
+РотФронт; [(0, 8, "B-BRAND")]
+
+Красный; [(0, 7, "B-BRAND")]
+
+Юбилейное; [(0, 9, "B-BRAND")]
+
+Инмарко; [(0, 7, "B-BRAND")]
+
+Нестле; [(0, 6, "B-BRAND")]
+
+Якобс; [(0, 6, "B-BRAND")]
+
+Тесс; [(0, 4, "B-BRAND")]
+
+Гринфилд; [(0, 9, "B-BRAND")]
+
+Рич; [(0, 4, "B-BRAND")]
+
+ДжейСевен; [(0, 2, "B-BRAND")]
+
+Валио; [(0, 5, "B-BRAND")]
+
+Президент; [(0, 9, "B-BRAND")]
+
+Ламбер; [(0, 7, "B-BRAND")]
+
+Белёвская; [(0, 9, "B-BRAND")]
+
+Шармэль; [(0, 7, "B-BRAND")]
+
+Махеевъ; [(0, 7, "B-BRAND")]
+
+Балтика; [(0, 7, "B-BRAND")]
+
+Велком; [(0, 6, "B-BRAND")]
+
+Кампомос; [(0, 8, "B-BRAND")]
+
+Орео Сникерс Марс; [(0, 4, "B-BRAND"), (5, 13, "B-BRAND"), (14, 18, "B-BRAND")]
+
+Лейс Принглс Эстрелла; [(0, 4, "B-BRAND"), (5, 13, "B-BRAND"), (14, 22, "B-BRAND")]
+
+Милка АльпенГолд Риттер; [(0, 5, "B-BRAND"), (6, 15, "B-BRAND"), (16, 22, "B-BRAND")]
+
+Данон Валио Президент; [(0, 6, "B-BRAND"), (7, 12, "B-BRAND"), (13, 22, "B-BRAND")]
+
+Мираторг Черкизово Петелинка; [(0, 8, "B-BRAND"), (9, 18, "B-BRAND"), (19, 28, "B-BRAND")]
+
+Рич Добрый ДжейСевен; [(0, 4, "B-BRAND"), (5, 10, "B-BRAND"), (11, 13, "B-BRAND")]
+
+Липтон Тесс Гринфилд; [(0, 6, "B-BRAND"), (7, 11, "B-BRAND"), (12, 21, "B-BRAND")]
+
+КитКат Баунти Твикс; [(0, 6, "B-BRAND"), (7, 13, "B-BRAND"), (14, 19, "B-BRAND")]
+
+Велком Останкино Рублёвский; [(0, 6, "B-BRAND"), (7, 16, "B-BRAND"), (17, 27, "B-BRAND")]
+
+Балтика Хайнекен Буд; [(0, 7, "B-BRAND"), (8, 16, "B-BRAND"), (17, 20, "B-BRAND")]
+
+КокаКола Пепси Фанта; [(0, 8, "B-BRAND"), (9, 14, "B-BRAND"), (15, 20, "B-BRAND")]
+
+Спрайт Швепс Миринда; [(0, 6, "B-BRAND"), (7, 13, "B-BRAND"), (14, 21, "B-BRAND")]
+
+Орео Милка АльпенГолд; [(0, 4, "B-BRAND"), (5, 10, "B-BRAND"), (11, 20, "B-BRAND")]
+
+Твикс Марс Баунти; [(0, 5, "B-BRAND"), (6, 10, "B-BRAND"), (11, 17, "B-BRAND")]
+
+КитКат Несквик Лайон; [(0, 6, "B-BRAND"), (7, 14, "B-BRAND"), (15, 19, "B-BRAND")]
+
+Лейс Эстрелла ХрусТим; [(0, 4, "B-BRAND"), (5, 13, "B-BRAND"), (14, 22, "B-BRAND")]
+
+Принглс РусскаяКартошка ФанниФриш; [(0, 8, "B-BRAND"), (9, 24, "B-BRAND"), (25, 36, "B-BRAND")]
+
+Данон Чудо Активиа; [(0, 6, "B-BRAND"), (7, 11, "B-BRAND"), (12, 19, "B-BRAND")]
+
+Валио Простоквашино Савушкин; [(0, 5, "B-BRAND"), (6, 18, "B-BRAND"), (19, 27, "B-BRAND")]
+
+Фанта; [(0, 5, "B-BRAND")]
+
+Спрайт; [(0, 6, "B-BRAND")]
+
+Миринда; [(0, 7, "B-BRAND")]
+
+Швепс; [(0, 6, "B-BRAND")]
+
+РедБулл; [(0, 7, "B-BRAND")]
+
+Монстер; [(0, 7, "B-BRAND")]
+
+Берн; [(0, 4, "B-BRAND")]
+
+Активиа; [(0, 7, "B-BRAND")]
+
+Чудо; [(0, 4, "B-BRAND")]
+
+ДомикВДеревне; [(0, 13, "B-BRAND")]
+
+Простоквашино; [(0, 12, "B-BRAND")]
+
+Савушкин; [(0, 8, "B-BRAND")]
+
+Агуша; [(0, 5, "B-BRAND")]
+
+Эпика; [(0, 5, "B-BRAND")]
+
+ВиммБилльДанн; [(0, 13, "B-BRAND")]
+
+Добрый; [(0, 6, "B-BRAND")]
+
+ФруктовыйСад; [(0, 12, "B-BRAND")]
+
+Я; [(0, 1, "B-BRAND")]
+
+Сочный; [(0, 7, "B-BRAND")]
+
+Любимый; [(0, 8, "B-BRAND")]
+
+КокаКоло Пепси Орио; [(0, 8, "B-BRAND"), (9, 14, "B-BRAND"), (15, 19, "B-BRAND")]
+
+Сникерс Марс Баунти; [(0, 8, "B-BRAND"), (9, 13, "B-BRAND"), (14, 20, "B-BRAND")]
+
+Милка АлпенГолт Ритер; [(0, 5, "B-BRAND"), (6, 15, "B-BRAND"), (16, 21, "B-BRAND")]
+
+Лейс Принглс Естрела; [(0, 4, "B-BRAND"), (5, 13, "B-BRAND"), (14, 21, "B-BRAND")]
+
+Донан Валио ПрезIndent; [(0, 5, "B-BRAND"), (6, 11, "B-BRAND"), (12, 22, "B-BRAND")]
+
+Миротог Черкизова Пителинка; [(0, 8, "B-BRAND"), (9, 18, "B-BRAND"), (19, 29, "B-BRAND")]
+
+Добрый Рич Джей7; [(0, 6, "B-BRAND"), (7, 10, "B-BRAND"), (11, 15, "B-BRAND")]
+
+Липтан Тесс Гринфилт; [(0, 6, "B-BRAND"), (7, 11, "B-BRAND"), (12, 21, "B-BRAND")]
+
+КитКат Твикс Баунти; [(0, 6, "B-BRAND"), (7, 12, "B-BRAND"), (13, 19, "B-BRAND")]
+
+Велкам Остнкино Рублевский; [(0, 6, "B-BRAND"), (7, 16, "B-BRAND"), (17, 27, "B-BRAND")]
+
+Балтика Хеникен Буд; [(0, 7, "B-BRAND"), (8, 15, "B-BRAND"), (16, 19, "B-BRAND")]
+
+Фанта Спраит Мириндо; [(0, 5, "B-BRAND"), (6, 12, "B-BRAND"), (13, 20, "B-BRAND")]
+
+Швепс РедБуул Монстор; [(0, 6, "B-BRAND"), (7, 14, "B-BRAND"), (15, 23, "B-BRAND")]
+
+Берн Эпика Агушша; [(0, 4, "B-BRAND"), (5, 10, "B-BRAND"), (11, 17, "B-BRAND")]
+
+Простаквашино Савушкин ВимБилДан; [(0, 13, "B-BRAND"), (14, 22, "B-BRAND"), (23, 32, "B-BRAND")]
+
+Акуша Я Любимый; [(0, 5, "B-BRAND"), (6, 7, "B-BRAND"), (8, 16, "B-BRAND")]
+
+ФрутовыйСад Сочний Бонакво; [(0, 12, "B-BRAND"), (13, 19, "B-BRAND"), (20, 27, "B-BRAND")]
+
+Инмарка Нестли Якобз; [(0, 7, "B-BRAND"), (8, 14, "B-BRAND"), (15, 21, "B-BRAND")]
+
+Шармель Махеев Балтикка; [(0, 7, "B-BRAND"), (8, 14, "B-BRAND"), (15, 23, "B-BRAND")]
+
+Кампомас Орео Сниикерс; [(0, 8, "B-BRAND"), (9, 13, "B-BRAND"), (14, 23, "B-BRAND")]
+
+nestle milka oreo; [(0, 6, "B-BRAND"), (7, 12, "B-BRAND"), (13, 17, "B-BRAND")]
+
+danone valio prostokvashino; [(0, 6, "B-BRAND"), (7, 12, "B-BRAND"), (13, 26, "B-BRAND")]
+
+lipton tess greenfield; [(0, 6, "B-BRAND"), (7, 11, "B-BRAND"), (12, 21, "B-BRAND")]
+
+lays pringles estrella; [(0, 4, "B-BRAND"), (5, 13, "B-BRAND"), (14, 22, "B-BRAND")]
+
+mars twix snickers; [(0, 4, "B-BRAND"), (5, 9, "B-BRAND"), (10, 18, "B-BRAND")]
+
+kinder ritter alpengold; [(0, 6, "B-BRAND"), (7, 13, "B-BRAND"), (14, 23, "B-BRAND")]
+
+miratorg cherkizovo petelinka; [(0, 8, "B-BRAND"), (9, 18, "B-BRAND"), (19, 28, "B-BRAND")]
+
+dobry rich j7; [(0, 5, "B-BRAND"), (6, 10, "B-BRAND"), (11, 13, "B-BRAND")]
+
+jacobs nescafe tchibo; [(0, 6, "B-BRAND"), (7, 14, "B-BRAND"), (15, 21, "B-BRAND")]
+
+cocacola pepsi fanta; [(0, 8, "B-BRAND"), (9, 14, "B-BRAND"), (15, 20, "B-BRAND")]
+
+sprite schweppes mirinda; [(0, 6, "B-BRAND"), (7, 16, "B-BRAND"), (17, 24, "B-BRAND")]
+
+baltiсa heineken bud; [(0, 7, "B-BRAND"), (8, 16, "B-BRAND"), (17, 20, "B-BRAND")]
+
+heinz maggi knorr; [(0, 5, "B-BRAND"), (6, 11, "B-BRAND"), (12, 17, "B-BRAND")]
+
+pampers huggies libero; [(0, 7, "B-BRAND"), (8, 15, "B-BRAND"), (16, 22, "B-BRAND")]
+
+lenor ariel persil; [(0, 5, "B-BRAND"), (6, 11, "B-BRAND"), (12, 18, "B-BRAND")]
+
+nivea rexona dove; [(0, 5, "B-BRAND"), (6, 12, "B-BRAND"), (13, 17, "B-BRAND")]
+
+colgate oralb blendamed; [(0, 7, "B-BRAND"), (8, 13, "B-BRAND"), (14, 23, "B-BRAND")]
+
+gillette bic schick; [(0, 8, "B-BRAND"), (9, 12, "B-BRAND"), (13, 19, "B-BRAND")]
+
+chanel dior gucci; [(0, 6, "B-BRAND"), (7, 11, "B-BRAND"), (12, 17, "B-BRAND")]
+
+zara bershka uniqlo; [(0, 4, "B-BRAND"), (5, 12, "B-BRAND"), (13, 19, "B-BRAND")]
+
+прастаквашено; [(0, 12, "B-BRAND")]
+
+чиркизова; [(0, 9, "B-BRAND")]
+
+мираторггг; [(0, 10, "B-BRAND")]
+
+петттелинка; [(0, 11, "B-BRAND")]
+
+валлио; [(0, 7, "B-BRAND")]
+
+ламберрт; [(0, 8, "B-BRAND")]
+
+хохлланд; [(0, 8, "B-BRAND")]
+
+савушшкин; [(0, 9, "B-BRAND")]
+
+иннмарко; [(0, 8, "B-BRAND")]
+
+баббавский; [(0, 9, "B-BRAND")]
+
+алиёнка; [(0, 8, "B-BRAND")]
+
+ротфронннт; [(0, 10, "B-BRAND")]
+
+крассный октябырь; [(0, 16, "B-BRAND")]
+
+милканаа; [(0, 8, "B-BRAND")]
+
+мерсси; [(0, 6, "B-BRAND")]
+
+фереро роще; [(0, 12, "B-BRAND")]
+
+бондуеллль; [(0, 10, "B-BRAND")]
+
+презиндент; [(0, 10, "B-BRAND")]
+
+рио мааре; [(0, 10, "B-BRAND")]
+
+хайнзз; [(0, 7, "B-BRAND")]
+
+пеппсси; [(0, 7, "B-BRAND")]
+
+кокаккола; [(0, 9, "B-BRAND")]
+
+фанннта; [(0, 7, "B-BRAND")]
+
+спрайтикк; [(0, 9, "B-BRAND")]
+
+хайнеккен; [(0, 9, "B-BRAND")]
+
+корронна экстра; [(0, 14, "B-BRAND")]
+
+туборррг; [(0, 9, "B-BRAND")]
+
+будвайззер; [(0, 10, "B-BRAND")]
+
+стелла артуаа; [(0, 14, "B-BRAND"), (7, 14, "I-BRAND")]
+
+жиггггули барное; [(0, 15, "B-BRAND"), (9, 15, "I-BRAND")]
+
+баллттика 7; [(0, 11, "B-BRAND")]
+
+карллсберг; [(0, 10, "B-BRAND")]
+
+тубборг грин; [(0, 13, "B-BRAND")]
+
+гиииннесс; [(0, 9, "B-BRAND")]
+
+хуугарден; [(0, 9, "B-BRAND")]
+
+крушовввице; [(0, 11, "B-BRAND")]
+
+бочкарёфф; [(0, 10, "B-BRAND")]
+
+миллерр; [(0, 8, "B-BRAND")]
+
+эфессс; [(0, 7, "B-BRAND")]
+
+бархххатное очаково; [(0, 18, "B-BRAND")]
+
+прастаквашено; [(0, 12, "B-BRAND")]
+
+валлиоо; [(0, 8, "B-BRAND")]
+
+савушшкиин; [(0, 11, "B-BRAND")]
+
+презиндентт; [(0, 11, "B-BRAND")]
+
+домик в дереевне; [(0, 18, "B-BRAND"), (6, 18, "I-BRAND")]
+
+веселыйй молочник; [(0, 18, "B-BRAND"), (8, 18, "I-BRAND")]
+
+активиаа; [(0, 9, "B-BRAND")]
+
+данноон; [(0, 7, "B-BRAND")]
+
+чудооо; [(0, 7, "B-BRAND")]
+
+инмаркоо; [(0, 8, "B-BRAND")]
+
+ламбберт; [(0, 9, "B-BRAND")]
+
+хохлландд; [(0, 10, "B-BRAND")]
+
+милккана; [(0, 8, "B-BRAND")]
+
+петтелиинка; [(0, 11, "B-BRAND")]
+
+осттанкино; [(0, 10, "B-BRAND")]
+
+черкиизово; [(0, 10, "B-BRAND")]
+
+клиннский; [(0, 9, "B-BRAND")]
+
+белугаа; [(0, 7, "B-BRAND")]
+
+царсская; [(0, 8, "B-BRAND")]
+
+русский стандард; [(0, 15, "B-BRAND"), (8, 15, "I-BRAND")]
+
+coca-cola; [(0, 9, "B-BRAND")]
+
+pepssi; [(0, 6, "B-BRAND")]
+
+layss; [(0, 5, "B-BRAND")]
+
+prinngles; [(0, 9, "B-BRAND")]
+
+fanta; [(0, 5, "B-BRAND")]
+
+danonn; [(0, 6, "B-BRAND")]
+
+milka; [(0, 5, "B-BRAND")]
+
+nescafe; [(0, 7, "B-BRAND")]
+
+nesquik; [(0, 7, "B-BRAND")]
+
+liptonn; [(0, 7, "B-BRAND")]
+
+presidentt; [(0, 10, "B-BRAND")]
+
+miratorg; [(0, 8, "B-BRAND")]
+
+cherkizov; [(0, 9, "B-BRAND")]
+
+savushkin; [(0, 9, "B-BRAND")]
+
+valio; [(0, 5, "B-BRAND")]
+
+dobryi; [(0, 6, "B-BRAND")]
+
+richh; [(0, 5, "B-BRAND")]
+
+hienz; [(0, 5, "B-BRAND")]
+
+maggi; [(0, 5, "B-BRAND")]
+
+kitkat; [(0, 6, "B-BRAND")]
+
+oreo; [(0, 4, "B-BRAND")]
+
+snickerss; [(0, 9, "B-BRAND")]
+
+mars; [(0, 4, "B-BRAND")]
+
+twixx; [(0, 5, "B-BRAND")]
+
+bounty; [(0, 6, "B-BRAND")]
+
+redbull; [(0, 7, "B-BRAND")]
+
+burnn; [(0, 5, "B-BRAND")]
+
+monster; [(0, 7, "B-BRAND")]
+
+gillette; [(0, 8, "B-BRAND")]
+
+colgate; [(0, 7, "B-BRAND")]
+
+fressco; [(0, 7, "B-BRAND")]
+
+kinder; [(0, 6, "B-BRAND")]
+
+ritter; [(0, 6, "B-BRAND")]
+
+shogetten; [(0, 9, "B-BRAND")]
+
+milkyway; [(0, 8, "B-BRAND")]
+
+tobleron; [(0, 8, "B-BRAND")]
+
+kit-katt; [(0, 7, "B-BRAND")]
+
+orbit; [(0, 5, "B-BRAND")]
+
+dirol; [(0, 5, "B-BRAND")]
+
+mentoss; [(0, 7, "B-BRAND")]
+
+hallss; [(0, 6, "B-BRAND")]
+
+chupa-chups; [(0, 11, "B-BRAND")]
+
+barni; [(0, 5, "B-BRAND")]
+
+belvita; [(0, 7, "B-BRAND")]
+
+jacobs; [(0, 6, "B-BRAND")]
+
+tassimo; [(0, 7, "B-BRAND")]
+
+starbucks; [(0, 9, "B-BRAND")]
+
+dallmayer; [(0, 9, "B-BRAND")]
+
+lavazza; [(0, 7, "B-BRAND")]
+
+illy; [(0, 4, "B-BRAND")]
+
+teekanne; [(0, 8, "B-BRAND")]
+
+ahmad; [(0, 5, "B-BRAND")]
+
+greenfield; [(0, 9, "B-BRAND")]
+
+akbar; [(0, 5, "B-BRAND")]
+
+brooke-bond; [(0, 11, "B-BRAND")]
+
+bonduell; [(0, 8, "B-BRAND")]
+
+hortex; [(0, 6, "B-BRAND")]
+
+doshirakk; [(0, 9, "B-BRAND")]
+
+rolltonn; [(0, 8, "B-BRAND")]
+
+anmirko; [(0, 7, "B-BRAND")]
+
+nestle; [(0, 6, "B-BRAND")]
+
+danette; [(0, 7, "B-BRAND")]
+
+bio-balans; [(0, 10, "B-BRAND")]
+
+actvia; [(0, 6, "B-BRAND")]
+
+chudo; [(0, 5, "B-BRAND")]
+
+veselyi-molocnik; [(0, 16, "B-BRAND")]
+
+domik-v-derevne; [(0, 15, "B-BRAND")]
+
+izbenka; [(0, 7, "B-BRAND")]
+
+prostokvashino; [(0, 13, "B-BRAND")]
+
+savushkinn; [(0, 9, "B-BRAND")]
+
+valeo; [(0, 5, "B-BRAND")]
+
+mirinda; [(0, 7, "B-BRAND")]
+
+schweppss; [(0, 9, "B-BRAND")]
+
+spritee; [(0, 7, "B-BRAND")]
+
+fuzetea; [(0, 7, "B-BRAND")]
+
+lipton-ice; [(0, 10, "B-BRAND")]
+
+kirieshki; [(0, 9, "B-BRAND")]
+
+3korochki; [(0, 9, "B-BRAND")]
+
+finetti; [(0, 7, "B-BRAND")]
+
+nutella; [(0, 7, "B-BRAND")]
