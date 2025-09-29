@@ -180,14 +180,13 @@ class NerDataSet(Dataset):
     ) -> list[dict]:
         tokens = tokenizer.convert_ids_to_tokens(encoded_inputs["input_ids"][0])
         offsets = encoded_inputs["offset_mapping"][0].cpu().numpy()
+        word_ids = encoded_inputs.word_ids(batch_index=0)
+
         pred_ids = [int(p) for p in predictions]
         labels = [idx2label.get(pid, "O") for pid in pred_ids]
 
         entities = []
-        current_word = None
-        word_start, word_end = None, None
-        word_labels = []
-        
+
         def assign_word_label(word, start, end, labels):
             for l in labels:
                 if l.startswith("B-"):
@@ -206,45 +205,37 @@ class NerDataSet(Dataset):
                 ent["word"] = word
             return ent
 
-        rev_end = None
+        current_word_id = None
+        current_offsets = []
+        current_labels = []
 
-        for token, (start, end), label in zip(tokens, offsets, labels):
-            if token in tokenizer.all_special_tokens or start == end:
+        for token, (start, end), label, wid in zip(tokens, offsets, labels, word_ids):
+            if wid is None or token in tokenizer.all_special_tokens or start == end:
                 continue
 
-            piece = text[start:end]
-
-            if (not current_word
-                or token.startswith("_")
-                or token.startswith("▁")
-                or label == "O" 
-                or (prev_end is not None and start > prev_end)):
-                if current_word:
-                    entities.append(assign_word_label(current_word, word_start, word_end, word_labels))
-                current_word = piece
-                word_start, word_end = start, end
-                word_labels = [label]
-
-            elif token.startswith("##"):
-                current_word += piece
-                word_end = end
-                word_labels.append(label)
-
-            elif prev_end is not None and start == prev_end:
-                current_word += piece
-                word_end = end
-                word_labels.append(label)
-
+            if current_word_id is None:
+                current_word_id = wid
+                current_offsets = [(start, end)]
+                current_labels = [label]
+            elif wid == current_word_id:
+                current_offsets.append((start, end))
+                current_labels.append(label)
             else:
-                entities.append(assign_word_label(current_word, word_start, word_end, word_labels))
-                current_word = piece
-                word_start, word_end = start, end
-                word_labels = [label]
+                word_start, word_end = current_offsets[0][0], current_offsets[-1][1]
+                word_text = text[word_start:word_end]
+                entities.append(assign_word_label(word_text, word_start, word_end, current_labels))
 
-            prev_end = end
+                current_word_id = wid
+                current_offsets = [(start, end)]
+                current_labels = [label]
 
-        if current_word:
-            entities.append(assign_word_label(current_word, word_start, word_end, word_labels))
+        if current_word_id is not None:
+            word_start, word_end = current_offsets[0][0], current_offsets[-1][1]
+            word_text = text[word_start:word_end]
+            entities.append(assign_word_label(word_text, word_start, word_end, current_labels))
+
+        return entities
+
             
         # def merge_entities(entities: list[dict], return_word: bool = True) -> list[dict]:
         #     n = len(entities)
