@@ -52,30 +52,28 @@ class NERPipelineCRF:
             return_tensors="pt"
         )
 
+        offset_mappings = encoded_batch.pop("offset_mapping").cpu().numpy()
         encodings = encoded_batch.encodings
         encoded_batch = {k: v.to(self.device) for k, v in encoded_batch.items()}
 
         with torch.no_grad():
             for i in range(0, len(texts), batch_size):
-                batch_slice = {
-                    k: v[i:i+batch_size]
-                    for k, v in encoded_batch.items()
-                }
+                batch_slice = {k: v[i:i+batch_size] for k, v in encoded_batch.items()}
                 outputs = self.model(**batch_slice)
                 preds = outputs.predictions.cpu().numpy()
-
                 for j, pred_seq in enumerate(preds):
                     idx = i + j
                     encoding = encodings[idx]
-
-                    encoded_inputs = {
-                        "input_ids": encoded_batch["input_ids"][idx:idx+1].cpu(),
-                        "offset_mapping": torch.tensor([encoding.offsets]),
-                    }
-                    encoded_inputs.word_ids = (
-                        lambda batch_index=0, enc=encoding: enc.word_ids
+                    offsets = offset_mappings[idx]
+                    from transformers.tokenization_utils_base import BatchEncoding
+                    encoded_inputs = BatchEncoding(
+                        {
+                            "input_ids": encoded_batch["input_ids"][idx:idx+1].cpu(),
+                            "offset_mapping": torch.tensor([offsets])
+                        },
+                        encoding=[encoding],
+                        tensor_type=None
                     )
-
                     entities = NerDataSet.decode_predictions(
                         texts[idx],
                         pred_seq,
@@ -85,6 +83,4 @@ class NERPipelineCRF:
                         return_word=return_word
                     )
                     all_results.append(entities)
-
         return all_results
-
