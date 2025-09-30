@@ -68,7 +68,6 @@ class AutoModelForTokenClassificationWithCRF(PreTrainedModel):
             "return_dict": return_dict,
         }
 
-        # Фильтруем только те, которые реально есть у backbone.forward
         sig = signature(self.backbone.forward)
         filtered_kwargs = {k: v for k, v in kwargs.items() if k in sig.parameters}
 
