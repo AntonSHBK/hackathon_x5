@@ -209,9 +209,23 @@ class NerDataSet(Dataset):
         current_word_id = None
         current_offsets = []
         current_labels = []
+        
+        punctuations = set("-.,:;!?%/\\()[]{}\"'«»“”‘’…")
+        prev_end = None
 
         for token, (start, end), label, wid in zip(tokens, offsets, labels, word_ids):
             if wid is None or token in tokenizer.all_special_tokens or start == end:
+                continue
+            if token in punctuations and prev_end is not None and start == prev_end:
+                if current_word_id is not None:
+                    current_offsets.append((start, end))
+                    current_labels.append(label)
+                prev_end = end
+                continue
+            if prev_end is not None and start == prev_end and current_word_id is not None and text[start:end].strip() != "":
+                current_offsets.append((start, end))
+                current_labels.append(label)
+                prev_end = end
                 continue
             if current_word_id is None:
                 current_word_id = wid
@@ -231,6 +245,7 @@ class NerDataSet(Dataset):
                 current_word_id = wid
                 current_offsets = [(start, end)]
                 current_labels = [label]
+            prev_end = end
         if current_word_id is not None:
             word_start, word_end = current_offsets[0][0], current_offsets[-1][1]
             word_text = text[word_start:word_end]
