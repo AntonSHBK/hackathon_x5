@@ -1,3 +1,4 @@
+from html import entities
 from typing import Tuple, Dict, Optional, Literal
 
 import torch
@@ -212,7 +213,6 @@ class NerDataSet(Dataset):
         for token, (start, end), label, wid in zip(tokens, offsets, labels, word_ids):
             if wid is None or token in tokenizer.all_special_tokens or start == end:
                 continue
-
             if current_word_id is None:
                 current_word_id = wid
                 current_offsets = [(start, end)]
@@ -223,93 +223,22 @@ class NerDataSet(Dataset):
             else:
                 word_start, word_end = current_offsets[0][0], current_offsets[-1][1]
                 word_text = text[word_start:word_end]
+                strip_left = len(word_text) - len(word_text.lstrip())
+                if strip_left > 0:
+                    word_start += strip_left
+                    word_text = word_text.lstrip()
                 entities.append(assign_word_label(word_text, word_start, word_end, current_labels))
-
                 current_word_id = wid
                 current_offsets = [(start, end)]
                 current_labels = [label]
-
         if current_word_id is not None:
             word_start, word_end = current_offsets[0][0], current_offsets[-1][1]
             word_text = text[word_start:word_end]
+            strip_left = len(word_text) - len(word_text.lstrip())
+            if strip_left > 0:
+                word_start += strip_left
+                word_text = word_text.lstrip()
             entities.append(assign_word_label(word_text, word_start, word_end, current_labels))
-
-        return entities
-
-            
-        # def merge_entities(entities: list[dict], return_word: bool = True) -> list[dict]:
-        #     n = len(entities)
-        #     if n == 0:
-        #         return []
-
-        #     ents = [e.copy() for e in entities]
-
-        #     i = 0
-        #     while i < n:
-        #         ent = ents[i]
-        #         tag = ent["entity"]
-
-        #         if tag.startswith("B-"):
-        #             t = tag.split("-", 1)[1]
-
-        #             j = i + 1
-        #             while j < n and not ents[j]["entity"].startswith("B-"):
-        #                 j += 1
-        #             stop = j
-
-        #             k = i + 1
-        #             first_i_same = None
-        #             while k < stop:
-        #                 tag_k = ents[k]["entity"]
-        #                 if tag_k.startswith("I-") and tag_k.split("-", 1)[1] == t:
-        #                     first_i_same = k
-        #                     break
-        #                 k += 1
-
-        #             if first_i_same is not None:
-        #                 for p in range(i + 1, first_i_same + 1):
-        #                     if ents[p]["entity"] == "O":
-        #                         ents[p]["entity"] = f"I-{t}"
-        #             i += 1
-        #         else:
-        #             i += 1
-
-        #     merged = []
-        #     buffer = None 
-        #     buffer_type = None
-
-        #     def flush():
-        #         nonlocal buffer, buffer_type
-        #         if buffer is not None:
-        #             merged.append(buffer)
-        #             buffer, buffer_type = None, None
-
-        #     for ent in ents:
-        #         tag = ent["entity"]
-        #         if tag.startswith("B-"):
-        #             flush()
-        #             buffer_type = tag.split("-", 1)[1]
-        #             buffer = ent.copy()
-        #         elif tag.startswith("I-"):
-        #             t = tag.split("-", 1)[1]
-        #             if buffer is not None and buffer_type == t:
-        #                 buffer["end_index"] = ent["end_index"]
-        #                 if return_word and "word" in ent and "word" in buffer:
-        #                     buffer["word"] = (buffer["word"] + " " + ent["word"]).strip()
-        #             else:
-        #                 flush()
-        #                 buffer_type = t
-        #                 buffer = ent.copy()
-        #                 buffer["entity"] = f"B-{t}"
-        #         else:
-        #             flush()
-        #             merged.append(ent)
-
-        #     flush()
-        #     return merged
-
-        # entities = merge_entities(entities, return_word=return_word)
-
         return entities
 
     @staticmethod
@@ -395,7 +324,7 @@ class NerDataSet(Dataset):
         all_correct = []
 
         with torch.no_grad():
-            for batch_idx, batch in enumerate(loader):
+            for batch_idx, batch in enumerate(tqdm(loader, desc="Analyzing with model", ncols=100)):
                 input_ids = batch["input_ids"].to(device)
                 attention_mask = batch["attention_mask"].to(device)
                 token_type_ids = batch["token_type_ids"].to(device)
