@@ -42,15 +42,12 @@ class NERPipelineCRF:
         
         all_results = []
         self.model.eval()
-
-        encoded_batch = self.tokenizer(
+        
+        encoded_batch = NerDataSet.prepare_text(
             texts,
-            max_length=self.max_length,
-            padding="max_length",
-            truncation=True,
-            return_offsets_mapping=True,
-            return_token_type_ids=True,
-            return_tensors="pt"
+            self.tokenizer,
+            self.max_length,
+            self.device
         )
 
         encodings = encoded_batch.encodings

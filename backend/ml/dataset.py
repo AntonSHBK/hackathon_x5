@@ -167,7 +167,9 @@ class NerDataSet(Dataset):
             return_token_type_ids=True,
             return_tensors="pt"
         )
-        encoded = {k: v.to(device) for k, v in encoded.items()}
+        for k, v in encoded.items():
+            if hasattr(v, "to"):
+                encoded[k] = v.to(device)
         return encoded
 
     @staticmethod
