@@ -695,3 +695,405 @@ kirieshki; [(0, 9, "B-BRAND")]
 finetti; [(0, 7, "B-BRAND")]
 
 nutella; [(0, 7, "B-BRAND")]
+
+super; [(0, 5, "B-BRAND")]
+
+fresh; [(0, 5, "B-BRAND")]
+
+happy; [(0, 5, "B-BRAND")]
+
+smile; [(0, 5, "B-BRAND")]
+
+green; [(0, 5, "B-BRAND")]
+
+best; [(0, 4, "B-BRAND")]
+
+cool; [(0, 4, "B-BRAND")]
+
+light; [(0, 5, "B-BRAND")]
+
+family; [(0, 6, "B-BRAND")]
+
+good; [(0, 4, "B-BRAND")]
+
+daily; [(0, 5, "B-BRAND")]
+
+nice; [(0, 4, "B-BRAND")]
+
+lucky; [(0, 5, "B-BRAND")]
+
+simple; [(0, 6, "B-BRAND")]
+
+fine; [(0, 4, "B-BRAND")]
+
+royal; [(0, 5, "B-BRAND")]
+
+true; [(0, 4, "B-BRAND")]
+
+prime; [(0, 5, "B-BRAND")]
+
+wonder; [(0, 6, "B-BRAND")]
+
+magic; [(0, 5, "B-BRAND")]
+
+power; [(0, 5, "B-BRAND")]
+
+energy; [(0, 6, "B-BRAND")]
+
+dream; [(0, 5, "B-BRAND")]
+
+star; [(0, 4, "B-BRAND")]
+
+moon; [(0, 4, "B-BRAND")]
+
+sunny; [(0, 5, "B-BRAND")]
+
+flow; [(0, 4, "B-BRAND")]
+
+shine; [(0, 5, "B-BRAND")]
+
+spark; [(0, 5, "B-BRAND")]
+
+pure; [(0, 4, "B-BRAND")]
+
+global; [(0, 6, "B-BRAND")]
+
+urban; [(0, 5, "B-BRAND")]
+
+fast; [(0, 4, "B-BRAND")]
+
+quick; [(0, 5, "B-BRAND")]
+
+joy; [(0, 3, "B-BRAND")]
+
+rise; [(0, 4, "B-BRAND")]
+
+nova; [(0, 4, "B-BRAND")]
+
+mega; [(0, 4, "B-BRAND")]
+
+alpha; [(0, 5, "B-BRAND")]
+
+omega; [(0, 5, "B-BRAND")]
+
+lite; [(0, 4, "B-BRAND")]
+
+rti; [(0, 3, "B-BRAND")]
+
+pro; [(0, 3, "B-BRAND")]
+
+max; [(0, 3, "B-BRAND")]
+
+xtra; [(0, 4, "B-BRAND")]
+
+go; [(0, 2, "B-BRAND")]
+
+one; [(0, 3, "B-BRAND")]
+
+neo; [(0, 3, "B-BRAND")]
+
+air; [(0, 3, "B-BRAND")]
+
+fit; [(0, 3, "B-BRAND")]
+
+up; [(0, 2, "B-BRAND")]
+
+now; [(0, 3, "B-BRAND")]
+
+all; [(0, 3, "B-BRAND")]
+
+qti; [(0, 3, "B-BRAND")]
+
+nxt; [(0, 3, "B-BRAND")]
+
+prime; [(0, 5, "B-BRAND")]
+
+ultra; [(0, 5, "B-BRAND")]
+
+edge; [(0, 4, "B-BRAND")]
+
+core; [(0, 4, "B-BRAND")]
+
+zoom; [(0, 4, "B-BRAND")]
+
+de0licat; [(0, 8, "B-BRAND")]
+
+xtr3me; [(0, 6, "B-BRAND")]
+
+max1mum; [(0, 7, "B-BRAND")]
+
+pr0style; [(0, 8, "B-BRAND")]
+
+n1ce; [(0, 4, "B-BRAND")]
+
+ul7ra; [(0, 5, "B-BRAND")]
+
+f4shion; [(0, 7, "B-BRAND")]
+
+gr8food; [(0, 7, "B-BRAND")]
+
+sw33t; [(0, 5, "B-BRAND")]
+
+tru3taste; [(0, 8, "B-BRAND")]
+
+l0vely; [(0, 6, "B-BRAND")]
+
+crun6hy; [(0, 7, "B-BRAND")]
+
+sn4ckz; [(0, 6, "B-BRAND")]
+
+fr3shy; [(0, 6, "B-BRAND")]
+
+y0ummi; [(0, 6, "B-BRAND")]
+
+h3althy; [(0, 7, "B-BRAND")]
+
+b3rry; [(0, 5, "B-BRAND")]
+
+g0ldie; [(0, 6, "B-BRAND")]
+
+sp1cey; [(0, 6, "B-BRAND")]
+
+qu1ck; [(0, 5, "B-BRAND")]
+
+taratelle; [(0, 9, "B-BRAND")]
+
+morabelle; [(0, 9, "B-BRAND")]
+
+lunarette; [(0, 9, "B-BRAND")]
+
+bonarotte; [(0, 9, "B-BRAND")]
+
+fioralina; [(0, 9, "B-BRAND")]
+
+cassatino; [(0, 9, "B-BRAND")]
+
+dolcetta; [(0, 8, "B-BRAND")]
+
+primarone; [(0, 9, "B-BRAND")]
+
+gustarelle; [(0, 10, "B-BRAND")]
+
+marzipette; [(0, 10, "B-BRAND")]
+
+rosabella; [(0, 9, "B-BRAND")]
+
+cioccarelle; [(0, 11, "B-BRAND")]
+
+bellaroma; [(0, 9, "B-BRAND")]
+
+mignonette; [(0, 10, "B-BRAND")]
+
+cantarella; [(0, 10, "B-BRAND")]
+
+sorellina; [(0, 9, "B-BRAND")]
+
+piacente; [(0, 8, "B-BRAND")]
+
+verdolina; [(0, 9, "B-BRAND")]
+
+lunacetta; [(0, 9, "B-BRAND")]
+
+doralisse; [(0, 9, "B-BRAND")]
+
+extra; [(0, 5, "B-BRAND")]
+
+melon; [(0, 5, "B-BRAND")]
+
+orbit; [(0, 5, "B-BRAND")]
+
+lays; [(0, 4, "B-BRAND")]
+
+mars; [(0, 4, "B-BRAND")]
+
+lion; [(0, 4, "B-BRAND")]
+
+raid; [(0, 4, "B-BRAND")]
+
+dove; [(0, 4, "B-BRAND")]
+
+colgate; [(0, 7, "B-BRAND")]
+
+puma; [(0, 4, "B-BRAND")]
+
+nike; [(0, 4, "B-BRAND")]
+
+adidas; [(0, 6, "B-BRAND")]
+
+tide; [(0, 4, "B-BRAND")]
+
+bold; [(0, 4, "B-BRAND")]
+
+sony; [(0, 4, "B-BRAND")]
+
+acer; [(0, 4, "B-BRAND")]
+
+dell; [(0, 4, "B-BRAND")]
+
+samsung; [(0, 7, "B-BRAND")]
+
+huawei; [(0, 6, "B-BRAND")]
+
+nokia; [(0, 5, "B-BRAND")]
+
+tond; [(0, 4, "B-BRAND")]
+
+zuno; [(0, 4, "B-BRAND")]
+
+vexa; [(0, 4, "B-BRAND")]
+
+moro; [(0, 4, "B-BRAND")]
+
+klyo; [(0, 4, "B-BRAND")]
+
+pura; [(0, 4, "B-BRAND")]
+
+nexo; [(0, 4, "B-BRAND")]
+
+fynn; [(0, 4, "B-BRAND")]
+
+lumo; [(0, 4, "B-BRAND")]
+
+daro; [(0, 4, "B-BRAND")]
+
+syra; [(0, 4, "B-BRAND")]
+
+korn; [(0, 4, "B-BRAND")]
+
+meld; [(0, 4, "B-BRAND")]
+
+froz; [(0, 4, "B-BRAND")]
+
+tova; [(0, 4, "B-BRAND")]
+
+brix; [(0, 4, "B-BRAND")]
+
+cora; [(0, 4, "B-BRAND")]
+
+nuvy; [(0, 4, "B-BRAND")]
+
+zaro; [(0, 4, "B-BRAND")]
+
+meyo; [(0, 4, "B-BRAND")]
+
+bakery; [(0, 6, "B-BRAND")]
+
+clear; [(0, 5, "B-BRAND")]
+
+fresh; [(0, 5, "B-BRAND")]
+
+pure; [(0, 4, "B-BRAND")]
+
+taste; [(0, 5, "B-BRAND")]
+
+simple; [(0, 6, "B-BRAND")]
+
+vital; [(0, 5, "B-BRAND")]
+
+dream; [(0, 5, "B-BRAND")]
+
+shine; [(0, 5, "B-BRAND")]
+
+flow; [(0, 4, "B-BRAND")]
+
+happy; [(0, 5, "B-BRAND")]
+
+sunny; [(0, 5, "B-BRAND")]
+
+soft; [(0, 4, "B-BRAND")]
+
+natural; [(0, 7, "B-BRAND")]
+
+bloom; [(0, 5, "B-BRAND")]
+
+spice; [(0, 5, "B-BRAND")]
+
+mellow; [(0, 6, "B-BRAND")]
+
+cloud; [(0, 5, "B-BRAND")]
+
+freshy; [(0, 6, "B-BRAND")]
+
+crisp; [(0, 5, "B-BRAND")]
+
+vision; [(0, 6, "B-BRAND")]
+
+passion; [(0, 7, "B-BRAND")]
+
+fusion; [(0, 6, "B-BRAND")]
+
+edition; [(0, 7, "B-BRAND")]
+
+motion; [(0, 6, "B-BRAND")]
+
+station; [(0, 7, "B-BRAND")]
+
+creation; [(0, 8, "B-BRAND")]
+
+solution; [(0, 8, "B-BRAND")]
+
+fashion; [(0, 7, "B-BRAND")]
+
+notion; [(0, 6, "B-BRAND")]
+
+precision; [(0, 9, "B-BRAND")]
+
+ambition; [(0, 8, "B-BRAND")]
+
+ignition; [(0, 8, "B-BRAND")]
+
+emotion; [(0, 7, "B-BRAND")]
+
+action; [(0, 6, "B-BRAND")]
+
+connection; [(0, 10, "B-BRAND")]
+
+expansion; [(0, 9, "B-BRAND")]
+
+elevation; [(0, 9, "B-BRAND")]
+
+attraction; [(0, 10, "B-BRAND")]
+
+perfection; [(0, 10, "B-BRAND")]
+
+mission; [(0, 7, "B-BRAND")]
+
+plet; [(0, 4, "B-BRAND")]
+
+blet; [(0, 4, "B-BRAND")]
+
+klet; [(0, 4, "B-BRAND")]
+
+zlet; [(0, 4, "B-BRAND")]
+
+flet; [(0, 4, "B-BRAND")]
+
+glet; [(0, 4, "B-BRAND")]
+
+slet; [(0, 4, "B-BRAND")]
+
+tlet; [(0, 4, "B-BRAND")]
+
+dlet; [(0, 4, "B-BRAND")]
+
+mlet; [(0, 4, "B-BRAND")]
+
+vlet; [(0, 4, "B-BRAND")]
+
+nlet; [(0, 4, "B-BRAND")]
+
+xlet; [(0, 4, "B-BRAND")]
+
+ylet; [(0, 4, "B-BRAND")]
+
+qlet; [(0, 4, "B-BRAND")]
+
+hlet; [(0, 4, "B-BRAND")]
+
+rlet; [(0, 4, "B-BRAND")]
+
+wlet; [(0, 4, "B-BRAND")]
+
+oplet; [(0, 5, "B-BRAND")]
+
+eplet; [(0, 5, "B-BRAND")]

@@ -43,7 +43,6 @@ class NERPipelineCRF:
         all_results = []
         self.model.eval()
 
-        # батчевая токенизация (fast токенайзер → есть .encodings с word_ids)
         encoded_batch = self.tokenizer(
             texts,
             max_length=self.max_length,
@@ -54,11 +53,9 @@ class NERPipelineCRF:
             return_tensors="pt"
         )
 
-        # сохраняем encodings и offset_mapping
         encodings = encoded_batch.encodings
         offset_mappings = encoded_batch["offset_mapping"].cpu().numpy()
 
-        # убираем offset_mapping и переносим на девайс
         encoded_batch = {k: v.to(self.device) for k, v in encoded_batch.items() if k != "offset_mapping"}
 
         with torch.no_grad():
@@ -72,7 +69,6 @@ class NERPipelineCRF:
                     encoding = encodings[idx]
                     offsets = offset_mappings[idx]
 
-                    # ✅ формируем BatchEncoding, чтобы decode_predictions мог вызвать .word_ids()
                     encoded_inputs = BatchEncoding(
                         {
                             "input_ids": encoded_batch["input_ids"][idx:idx+1].cpu(),
