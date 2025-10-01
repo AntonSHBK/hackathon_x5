@@ -9,6 +9,7 @@ from tqdm import tqdm
 import matplotlib.pyplot as plt
 from torch.utils.data import Dataset, DataLoader
 from transformers import AutoTokenizer, DebertaV2Tokenizer
+from sklearn.metrics import roc_curve, precision_recall_curve, f1_score
 
 from ml.visualizer import DynamicEmbeddingVisualizer
 
@@ -439,7 +440,7 @@ class NerDataSet(Dataset):
     def visualize_embeddings(
         self,
         source: Literal["mean", "cls", "words"] = "mean",
-        method: str = "umap",
+        method: str = "tsne",
         n_components: int = 2,
         n_samples: Optional[int] = None,
         random_state: int = 42,
@@ -484,6 +485,119 @@ class NerDataSet(Dataset):
         vis = DynamicEmbeddingVisualizer(embs, df, labels=labels)
         vis.reduce_dimensionality(method=method, n_components=n_components)
         vis.visualize(method=method, **kwargs)
+        
+    def compute_entropy_thresholds(self, idx2label: dict, method: str = "roc"):
+        thresholds = {}
+
+        entropies, labels = [], []
+        for i, row in self.df.iterrows():
+            ents = row["entities"]
+            word_entropies = self._entropies[i]["words"]
+
+            for ent in ents:
+                if ent["entity"] == "O":
+                    continue
+                label = ent["entity"].split("-", 1)[-1]
+                word_ents = [we["entropy"] for we in word_entropies
+                             if we["start"] >= ent["start_index"] and we["end"] <= ent["end_index"]]
+                if not word_ents:
+                    continue
+                ent_entropy = np.mean(word_ents)
+                entropies.append(ent_entropy)
+                labels.append(int(ent in row[self.target_label]))
+
+        entropies = np.array(entropies)
+        labels = np.array(labels)
+
+        for idx, class_name in idx2label.items():
+            mask = [ent["entity"].endswith(class_name) for ents in self.df["entities"] for ent in ents if ent["entity"] != "O"]
+            if not any(mask):
+                continue
+            class_ents = entropies[mask]
+            class_labels = labels[mask]
+
+            if method == "roc":
+                fpr, tpr, thr = roc_curve(class_labels, class_ents)  
+                j_scores = tpr - fpr
+                best_thr = thr[np.argmax(j_scores)]
+            elif method == "prc":
+                prec, rec, thr = precision_recall_curve(class_labels, class_ents)
+                f1 = 2 * (prec * rec) / (prec + rec + 1e-12)
+                best_thr = thr[np.argmax(f1)]
+            else:
+                raise ValueError("method должен быть 'roc' или 'prc'")
+
+            thresholds[class_name] = best_thr
+
+        return thresholds
+    
+    def evaluate_accuracy_by_entropy_thresholds(
+        self,
+        thresholds: dict,
+        avg_threshold: float,
+        confident: bool = True,
+        idx2label: dict = None
+    ):
+        selected = []
+
+        total_samples = 0
+        total_correct = 0
+
+        for i, row in self.df.iterrows():
+            ents = row["entities"]
+            gold_ents = {(s, e, l) for (s, e, l) in row[self.target_label]}
+
+            word_entropies = self._entropies[i]["words"]
+
+            for ent in ents:
+                if ent["entity"] == "O":
+                    continue
+
+                label = ent["entity"].split("-", 1)[-1]
+                start, end = ent["start_index"], ent["end_index"]
+
+                word_ents = [
+                    we["entropy"] for we in word_entropies
+                    if we["start"] >= start and we["end"] <= end
+                ]
+                if not word_ents:
+                    continue
+                entropy_value = np.mean(word_ents)
+
+                threshold = thresholds.get(label, avg_threshold)
+
+                condition = (entropy_value < threshold) if confident else (entropy_value >= threshold)
+                if not condition:
+                    continue
+
+                total_samples += 1
+                correct = int((start, end, ent["entity"]) in gold_ents)
+                total_correct += correct
+
+                selected.append({
+                    "text": row[self.text_label],
+                    "entity_text": row[self.text_label][start:end],
+                    "true_entities": list(gold_ents),
+                    "pred_entity": ent["entity"],
+                    "entropy": entropy_value,
+                    "threshold": threshold,
+                    "correct": correct
+                })
+
+        accuracy = total_correct / total_samples if total_samples > 0 else 0.0
+        coverage = total_samples / len(self.df) if len(self.df) > 0 else 0.0
+
+        predictions_df = pd.DataFrame(selected)
+
+        print(f"Samples selected: {total_samples}")
+        print(f"Accuracy ({'confident' if confident else 'uncertain'}): {accuracy:.2%}")
+        print(f"Coverage: {coverage:.2%}")
+
+        return {
+            "accuracy": accuracy,
+            "coverage": coverage,
+            "predictions_df": predictions_df
+        }
 
 
 
