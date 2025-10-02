@@ -44,3 +44,41 @@
 - [Описание данных](docs/dataset.md)  
 - [Описание модели](docs/model.md)  
 - [Процесс обучения](docs/train.md)  
+
+## Запуск 
+
+В docker-compose.yml можно указать переменные среды для 
+```
+MAX_BATCH=24 # максимальный объем батча
+MAX_WAIT_MS=6 # временное окно батча
+WORKERS=2 # кол-во воркеров = числу vCPU
+```
+Далее, разворачиваем проект
+```
+cd docker
+docker compose up --build -d
+```
+Модель должна лежать в 
+```
+/data/models/
+```
+
+## API
+
+```
+POST /api/predict
+body:
+{"input": "йогурт даниссимо фантазия"}
+```
+Response:
+```
+[
+  { "start_index": 0, "end_index": 6, "entity": "B-BRAND" }
+]
+```
+Для теста 
+```
+curl -s -X POST http://127.0.0.1:8080/api/predict \
+  -H "Content-Type: application/json" \
+  -d '{"input":"йогурт даниссимо фантазия"}'
+```
