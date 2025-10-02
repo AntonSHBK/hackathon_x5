@@ -59,9 +59,18 @@ WORKERS=2 # кол-во воркеров = числу vCPU
 cd docker
 docker compose up --build -d
 ```
-Модель должна лежать в 
+Файлы
 ```
-/data/models/
+label2idx.json
+idx2label.json
+```
+генерируются при обучении модели в data/models/. Сама модель должна лежать в папке
+```
+/data/models/ner_x5_tiny_last
+```
+Если название отличается, изменить в *backend/app/main.py*
+```
+model_dir = data_dir / "ner_x5_tiny_last"
 ```
 
 ## API
